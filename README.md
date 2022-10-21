@@ -28,22 +28,22 @@ Pins à venir :
 ## Notes
 
 #### Sélection joueurs
-Pour Sélectionner le nombre de joueur(s), x appui sur start = x joueur. Maximum 4 joueurs.
-Tant que le délai est pas dépassé, appuyer sur start augmente le nombre de joueur et réinitialise le délai.
-Si > 4 reviens à 1 joueur. 
-Si le délai est dépassé, démarrage de la partie. (afficher décompte sur afficheur ?)
-Le délai est configurable, par défaut 5 secondes.
+Pour Sélectionner le nombre de joueur(s), x appui sur start = x joueur. Maximum 4 joueurs.\
+Tant que le délai est pas dépassé, appuyer sur start augmente le nombre de joueur et réinitialise le délai.\
+Si > 4 reviens à 1 joueur.\
+Si le délai est dépassé, démarrage de la partie. (afficher décompte sur afficheur ?)\
+Le délai est configurable, par défaut 5 secondes.\
 
 #### En jeu
-Si la balle est détectée sur ballDetection, on éjecte avec la sortie ballEjection.
-Si la balle pas détectée sur ballDetection, afficher un message bille absente.
+Si la balle est détectée sur ballDetection, on éjecte avec la sortie ballEjection.\
+Si la balle pas détectée sur ballDetection, afficher un message bille absente.\
 
-Des boutons incrémentent le score du joueur en cours (10, 100, 1000, 10000).
-(Possibilité de mettre plusieurs boutons sur un même score / entrée)
+Des boutons incrémentent le score du joueur en cours (10, 100, 1000, 10000).\
+(Possibilité de mettre plusieurs boutons sur un même score / entrée)\
 
 #### Fin de partie
-Si la balle est détectée sur ballDetection, on passe au joueur suivant.
-Fin de partie quand 3 balles ont été détécté sur tout les joueurs.
+Si la balle est détectée sur ballDetection, on passe au joueur suivant.\
+Fin de partie quand 3 balles ont été détécté sur tout les joueurs.\
 
 fin de la partie quand 3 balles par joueur sont detectées
 
