@@ -18,7 +18,6 @@ void Flipper::init()
   pinMode(start, INPUT);
   pinMode(ballDetection, INPUT);
   pinMode(ballEjection, OUTPUT);
-  pinMode(BallIndex, OUTPUT);
 }
 
 /*

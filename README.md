@@ -4,25 +4,33 @@
 
 Nom           | Mode | Pin
 --------------|------|----
-points10      | IN   | D22
-points100     | IN   | D23
-points1000    | IN   | D24
-points10000   | IN   | D25
-credits       | IN   | D26
-start         | IN   | D27
-ballDetection | IN   | D28
-ballEjection  | OUT  | A0
+points10      | IN   | D40
+points100     | IN   | D41
+points1000    | IN   | D42
+points10000   | IN   | D43
+credits       | IN   | D44
+start         | IN   | D45
+ballDetection | IN   | D46
+ballEjection  | OUT  | ?
 
 ### Matrice LED
-Nom    | Mode | Pin
--------|------|----
-ENABLE | OUT  | D9
-A      | OUT  | D6
-B      | OUT  | D7
-CLK    | OUT  | D13
-SCLK   | OUT  | D8
-DATA   | OUT  | D11
-GND    | -    | GND
+Brochage standard DFRobot (pareil sur copies chinoise)
+Nom | Mode | Pin
+----|------|----
+G1  | OUT  | 26
+G2  | OUT  | 29
+R1  | OUT  | 24
+R2  | OUT  | 27
+B1  | OUT  | 25
+B2  | OUT  | 28
+A   | OUT  | A0
+B   | OUT  | A1
+C   | OUT  | A2
+D   | OUT  | A3
+LAT | OUT  | D10
+CLK | OUT  | D11
+OE  | OUT  | D9
+GND | -    | GND
 
 Pins possible :
 - Contrôle leds/ampoule ?
@@ -33,6 +41,7 @@ Pins possible :
 
 - Afficheur LED 32*16 P10
 <!-- [https://circuitdigest.com/microcontroller-projects/digital-notice-board-using-p10-led-matrix-display-and-arduino] -->
+<!-- matrice pins standard : [https://www.hackster.io/Maddy/using-the-dfrobot-rgb-led-matrix-921141] -->
 - Arduino mega 2560
 
 ## Notes
