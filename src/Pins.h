@@ -1,0 +1,9 @@
+#define points10        22  // Entrée Digitale
+#define points100       23  // Entrée Digitale
+#define points1000      24  // Entrée Digitale
+#define points10000     25  // Entrée Digitale
+#define credits         26  // Entrée Digitale
+#define start           27  // Entrée Digitale
+#define ballDetection   28  // Entrée Digitale
+#define ballEjection    0   // Sortie nalogique
+#define BallIndex       1   // Sortie Analogique
