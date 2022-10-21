@@ -85,4 +85,4 @@ short currentMaxPlayers;  // Nombre de joueurs maximum pour la partie (incrémen
 short playerTurn;         // id du joueur qui joue
 ```
 
-![Schema](https://github.com/Erinell/Flipper/blob/master/docs/imgs/Schematic_Flipper_2022-10-21.png)
+![Schema](https://github.com/Erinell/Flipper/blob/master/docs/img/Schematic_Flipper_2022-10-21.png?raw=true)
