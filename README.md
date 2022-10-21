@@ -2,7 +2,7 @@
 
 ## Pins
 
-Name          | Mode | pin
+Nom           | Mode | pin
 --------------|------|----
 points10      | IN   | D22
 points100     | IN   | D23
