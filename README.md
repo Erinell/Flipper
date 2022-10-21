@@ -21,13 +21,9 @@ Pins à venir :
 
 ## Hardware
 
-- 32*16 P10 LED display
+- Afficheur LED 32*16 P10
 <!-- [https://circuitdigest.com/microcontroller-projects/digital-notice-board-using-p10-led-matrix-display-and-arduino] -->
 - Arduino mega 2560
-
-
-## Configuration
-
 
 ## Notes
 
