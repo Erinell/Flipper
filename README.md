@@ -84,3 +84,5 @@ unsigned short startDelay;    // Délai avant le démarrage de la partie (reset 
 short currentMaxPlayers;  // Nombre de joueurs maximum pour la partie (incrémente à chaque appui start)
 short playerTurn;         // id du joueur qui joue
 ```
+
+<!-- ![Schema](https://github.com/Erinell/Flipper/blob/[branch]/image.jpg?raw=true) -->
