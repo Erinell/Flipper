@@ -2,7 +2,7 @@
 
 ## Pins
 
-Nom           | Mode | pin
+Nom           | Mode | Pin
 --------------|------|----
 points10      | IN   | D22
 points100     | IN   | D23
@@ -13,9 +13,19 @@ start         | IN   | D27
 ballDetection | IN   | D28
 ballEjection  | OUT  | A0
 
-Pins à venir :
-- leds ?
-- Afficheur
+### Matrice LED
+Nom    | Mode | Pin
+-------|------|----
+ENABLE | OUT  | D9
+A      | OUT  | D6
+B      | OUT  | D7
+CLK    | OUT  | D13
+SCLK   | OUT  | D8
+DATA   | OUT  | D11
+GND    | -    | GND
+
+Pins possible :
+- Contrôle leds/ampoule ?
 - Solenoïdes
 <!-- BallIndex     | OUT  | A1 -->
 
