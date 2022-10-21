@@ -43,7 +43,7 @@ Des boutons incrémentent le score du joueur en cours (10, 100, 1000, 10000).\
 
 #### Fin de partie
 Si la balle est détectée sur ballDetection, on passe au joueur suivant.\
-Fin de partie quand 3 balles ont été détécté sur tout les joueurs.\
+Fin de partie quand 3 balles ont été détéctées sur tout les joueurs.\
 
 fin de la partie quand 3 balles par joueur sont detectées
 
