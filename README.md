@@ -53,9 +53,11 @@ Si > 4 reviens à 1 joueur.\
 Si le délai est dépassé, démarrage de la partie. (afficher décompte sur afficheur ?)\
 Le délai est configurable, par défaut 5 secondes.
 
+Après 5 secondes, un appui sur start commence la partie seulement si la balle est détectée.
+Si la balle pas détectée sur ballDetection, afficher un message bille absente.
+
 #### En jeu
 Si la balle est détectée sur ballDetection, on éjecte avec la sortie ballEjection.\
-Si la balle pas détectée sur ballDetection, afficher un message bille absente.
 
 Des boutons incrémentent le score du joueur en cours (10, 100, 1000, 10000).\
 (Possibilité de mettre plusieurs boutons sur un même score / entrée)
