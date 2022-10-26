@@ -1,0 +1,175 @@
+{
+  "uuid": "56134412190c6b8a12c26a75694fe7e3",
+  "path": "Offline/Flipper",
+  "name": "Flipper",
+  "content": "",
+  "created_at": "2022-10-20 11:27:49",
+  "updated_at": "2022-10-24 14:25:53",
+  "stick": "",
+  "documents": [
+    {
+      "uuid": "992ec60caa916b6c0f92284c02a47478",
+      "title": "Sheet_1",
+      "description": "",
+      "docType": "1",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "c9c4cca9f04a460da9c9e77b83218eab": 1,
+        "4797a67d0d36465a857cf47f780b3a72": 7,
+        "47d68beb5cfd4f0a99772258d07a4dde": 7,
+        "4f13e6cfe8d24e1da724f4322b1bdb9e": 2
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "10K-OHM-RESISTOR",
+          7,
+          "10K-OHM-RESISTOR",
+          "R1,R2,R3,R4,R5,R6,R7",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "",
+            "uuid": "47d68beb5cfd4f0a99772258d07a4dde"
+          }
+        ],
+        [
+          "Matrice LED",
+          2,
+          "918516X329",
+          "SMD1,SMD2",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "b115dc2a7fd3455ea282f5965ff25dd6",
+            "uuid": "4f13e6cfe8d24e1da724f4322b1bdb9e"
+          }
+        ],
+        [
+          "10 points",
+          1,
+          "SPST-PUSHBUTTON-02",
+          "SW1",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "0b369edaccec45f7ac84a8c9840608a7",
+            "uuid": "4797a67d0d36465a857cf47f780b3a72"
+          }
+        ],
+        [
+          "100 points",
+          1,
+          "SPST-PUSHBUTTON-02",
+          "SW2",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "0b369edaccec45f7ac84a8c9840608a7",
+            "uuid": "4797a67d0d36465a857cf47f780b3a72"
+          }
+        ],
+        [
+          "1000 points",
+          1,
+          "SPST-PUSHBUTTON-02",
+          "SW3",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "0b369edaccec45f7ac84a8c9840608a7",
+            "uuid": "4797a67d0d36465a857cf47f780b3a72"
+          }
+        ],
+        [
+          "10000 points",
+          1,
+          "SPST-PUSHBUTTON-02",
+          "SW4",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "0b369edaccec45f7ac84a8c9840608a7",
+            "uuid": "4797a67d0d36465a857cf47f780b3a72"
+          }
+        ],
+        [
+          "credits",
+          1,
+          "SPST-PUSHBUTTON-02",
+          "SW5",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "0b369edaccec45f7ac84a8c9840608a7",
+            "uuid": "4797a67d0d36465a857cf47f780b3a72"
+          }
+        ],
+        [
+          "start",
+          1,
+          "SPST-PUSHBUTTON-02",
+          "SW6",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "0b369edaccec45f7ac84a8c9840608a7",
+            "uuid": "4797a67d0d36465a857cf47f780b3a72"
+          }
+        ],
+        [
+          "detection balle",
+          1,
+          "SPST-PUSHBUTTON-02",
+          "SW7",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "0b369edaccec45f7ac84a8c9840608a7",
+            "uuid": "4797a67d0d36465a857cf47f780b3a72"
+          }
+        ],
+        [
+          "ARDUINO MEGA 2560 R3 V1.0",
+          1,
+          "TWIX_MEGA_PCB____ARDUINO-MEGA2560-FOOTPRINT_",
+          "U1",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "3e3887f7d5ec4fc7922ece0c25601d9c",
+            "uuid": "c9c4cca9f04a460da9c9e77b83218eab"
+          }
+        ]
+      ],
+      "updateTime": 1666614353,
+      "createTime": 1666258070,
+      "histories": [],
+      "created_at": "2022-10-20 11:27:50",
+      "updated_at": "2022-10-24 14:25:53"
+    }
+  ],
+  "sort": [],
+  "title": "Flipper",
+  "foldername": "Flipper",
+  "schfilename": "Flipper.json",
+  "schfilemtime": 1666614353174
+}

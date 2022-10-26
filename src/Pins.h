@@ -23,3 +23,11 @@
 #define LAT             10  // Sortie Digitale
 #define CLK             11  // Sortie Digitale
 #define OE              9   // Sortie Digitale
+
+// ------------ Matrice LED HUB12 ------------
+#define OE              7
+#define SCLK            8
+#define CKL             9
+#define R               10
+#define A               11
+#define B               12
