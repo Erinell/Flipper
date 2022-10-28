@@ -35,6 +35,10 @@ void loop()
     // partie fini pour ce joueur
   }
 
+  if(flipper.isBallDetected()){
+    // Passer au joueur suivant
+  }
+
   if (!flipper.isBallDetected())
   {
     // Afficher bille absente
