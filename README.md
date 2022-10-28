@@ -14,7 +14,19 @@ ballDetection | IN   | D46
 ballEjection  | OUT  | ?
 
 ### Matrice LED
-Brochage standard DFRobot (pareil sur copies chinoise)
+
+HUB12 brochage
+Nom  | Mode | Pin
+-----|------|----
+OE   | OUT  | D7
+SCLK | OUT  | D8
+CKL  | OUT  | D9
+R    | OUT  | D10
+A    | OUT  | D11
+B    | OUT  | D12
+
+
+HUB75 brochage
 Nom | Mode | Pin
 ----|------|----
 G1  | OUT  | 26
@@ -65,8 +77,6 @@ Des boutons incrémentent le score du joueur en cours (10, 100, 1000, 10000).\
 #### Fin de partie
 Si la balle est détectée sur ballDetection, on passe au joueur suivant.\
 Fin de partie quand 3 balles ont été détéctées sur tout les joueurs.
-
-fin de la partie quand 3 balles par joueur sont detectées
 
 ## Classes
 
