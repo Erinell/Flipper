@@ -9,11 +9,13 @@ private:
   unsigned short startDelay;
 
   // state
-  short currentMaxPlayers = 0;
-  short playerTurn = 0;
+  unsigned short currentMaxPlayers = 0;
+  unsigned short playerTurn = 0;
 
   long timer = 0;
-  bool scoreUpdated = false;
+  bool maxPlayersUpdated;
+  bool scoreUpdated;
+  bool ballDetected;
   Player players[];
 
 public:
@@ -26,9 +28,16 @@ public:
 
   void init();
   bool canStart();
+
   void updatePlayer();
+  void updateScore();
+
   bool isBallDetected();
   Player currentPlayer();
+  void nextPlayer();
   short getMaxTry();
-  void updateScore(Player currentPlayer);
+  short getMaxPlayer();
+  short getTimer();
+
+  void ejection();
 };

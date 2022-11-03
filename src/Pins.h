@@ -1,13 +1,16 @@
 // ------------ Boutons ------------
 
-#define points10        40  // Entrée Digitale
-#define points100       41  // Entrée Digitale
-#define points1000      42  // Entrée Digitale
-#define points10000     43  // Entrée Digitale
-#define credits         44  // Entrée Digitale
-#define start           45  // Entrée Digitale
-#define ballDetection   46  // Entrée Digitale
-#define ballEjection    -1  // Sortie analogique
+#define points10        22  // Entrée Digitale
+#define points100       24  // Entrée Digitale
+#define points1000      26  // Entrée Digitale
+#define points10000     28  // Entrée Digitale
+#define credits         -1  // Entrée Digitale
+#define start           30  // Entrée Digitale temporaire (actuellement corresponse a balldetection)
+#define ballDetection   -1  // Entrée Digitale
+
+// ------------ Solenoides ------------
+
+#define ballEjection    40  // Sortie analogique
 
 // ------------ Matrice LED HUB75 ------------
 /*

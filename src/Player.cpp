@@ -1,11 +1,13 @@
 #include "Player.h"
+#include <Arduino.h>
 
 Player::Player(unsigned short id)
 {
   this->id = id;
 }
 
-unsigned short Player::getId(){
+unsigned short Player::getId()
+{
   return this->id;
 }
 
@@ -14,14 +16,17 @@ void Player::addDetectedBall()
   this->ballsDetected++;
 }
 
-short Player::detectedBalls(){
+short Player::detectedBalls()
+{
   return this->ballsDetected;
 }
 
-void Player::increaseScore(unsigned short points){
+void Player::increaseScore(int points)
+{
   this->score += points;
 }
 
-unsigned long Player::getScore(){
+unsigned long Player::getScore()
+{
   return this->score;
 }
