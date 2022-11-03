@@ -44,11 +44,6 @@ CLK | OUT  | D11
 OE  | OUT  | D9
 GND | -    | GND
 
-Pins possible :
-- Contrôle leds/ampoule ?
-- Solenoïdes
-<!-- BallIndex     | OUT  | A1 -->
-
 ## Hardware
 
 - Afficheur LED 32*16 P10
