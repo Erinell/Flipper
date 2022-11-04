@@ -30,3 +30,12 @@ unsigned long Player::getScore()
 {
   return this->score;
 }
+
+void Player::setEndGame(bool endGame){
+  this->endGame = endGame;
+}
+
+bool Player::isOut()
+{
+  return this->endGame;
+}

@@ -14,56 +14,57 @@ void setup()
 
   Serial.begin(9600);
 
-   while (!flipper.canStart())
+  while (!flipper.isBallDetected())
   {
-    Serial.print("temps restant : ");
-     Serial.println(flipper.getTimer());
-    // Serial.print(" | ");
-    // Serial.println(flipper.getMaxPlayer());
-  
-     // en attente d'appui sur bouton start
-     // incrémente nombre joueur
-     // fin si délai > config (ici 5 sec) ou nombre joueur == joueur max config
-     // on peux update l'afficheur ici pour le nombre de joueur en temps réel
-   }
+    Serial.println("Balle absente, impossible de démarrer.");
+  }
 
-  // while (!flipper.isBallDetected())
-  //{
-  //   Serial.println("Balle absente, impossible de démarrer.");
-  //   // tant que pas de bille,
-  //   // on l'affiche et ça démarre pas.
-  // }
-  Serial.println("Démarrage de la partie...");
+  while (!flipper.canStart())
+  {
+    Serial.print("Démarrage dans : ");
+    Serial.println(flipper.getTimer());
+  }
+
+  Serial.print("Démarrage de la partie avec ");
+  Serial.print(flipper.getMaxPlayer());
+  Serial.println(" joueur(s).");
 
   flipper.updatePlayer();
+
 }
 
 void loop()
 {
-
   Player currentPlayer = flipper.currentPlayer();
 
   flipper.updateScore();
 
-  // flipper.nextPlayer();
+  Serial.print("Joueur ");
+  Serial.print(currentPlayer.getId());
+  Serial.print(" : ");
+  Serial.print(currentPlayer.getScore());
+  Serial.print(" points, ");
+  Serial.print(currentPlayer.detectedBalls());
+  Serial.println(" coups");
 
-  // if (flipper.isBallDetected() && currentPlayer.detectedBalls() >= flipper.getMaxTry())
-  // {
-  //   // partie fini pour ce joueur
-  // }
-
-  // if (flipper.isBallDetected() && currentPlayer.detectedBalls() < flipper.getMaxTry())
-  // {
-  //   // Passer au joueur suivant
-  // }
-
-  if (flipper.isBallDetected())
+  if (!flipper.isBallDetected())
   {
-    flipper.ejection();
+    return;
   }
 
+  if (currentPlayer.detectedBalls() < flipper.getMaxTry())
+  {
+    flipper.nextPlayer();
+  }
 
-  // Serial.print(currentPlayer.getId());
-  // Serial.print(" : ");
-  // Serial.println(currentPlayer.getScore());
+  if (currentPlayer.detectedBalls() >= flipper.getMaxTry())
+  {
+    currentPlayer.setEndGame(true);
+    while (currentPlayer.isOut())
+    {
+      flipper.nextPlayer();
+    }
+  }
+
+  flipper.ejection();
 }

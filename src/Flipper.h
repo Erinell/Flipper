@@ -8,7 +8,6 @@ private:
   unsigned short maxTry;
   unsigned short startDelay;
 
-  // state
   unsigned short currentMaxPlayers = 0;
   unsigned short playerTurn = 0;
 

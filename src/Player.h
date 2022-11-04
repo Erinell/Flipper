@@ -10,6 +10,7 @@ private:
   unsigned short id = 0;
   unsigned short ballsDetected = 0;
   unsigned long score = 0;
+  bool endGame = false;
 
 public:
   Player(unsigned short id);
@@ -19,6 +20,8 @@ public:
   short detectedBalls();
   void increaseScore(int points);
   unsigned long getScore();
+  void setEndGame(bool endGame);
+  bool isOut();
 };
 
 #endif
