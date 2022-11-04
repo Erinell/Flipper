@@ -63,6 +63,7 @@ void loop()
     while (currentPlayer.isOut())
     {
       flipper.nextPlayer();
+      // TODO : fin de partie quand tout les joueurs ont fini.
     }
   }
 
