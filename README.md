@@ -73,24 +73,5 @@ Des boutons incrémentent le score du joueur en cours (10, 100, 1000, 10000).\
 Si la balle est détectée sur ballDetection, on passe au joueur suivant.\
 Fin de partie quand 3 balles ont été détéctées sur tout les joueurs.
 
-## Classes
-
-### Joueur
-```c++
-unsigned short id;              // id du joueur entre 1 et maxPlayers
-unsigned short ballsDetected;   // nombre de balles jouées
-unsigned long score;            // Le score
-```
-
-### Flipper
-```c++
-unsigned short maxPlayers;    // Nombre de joueurs maximum dans la config
-unsigned short maxTry;        // Nombre de balle jouée avant fin de partie
-unsigned short startDelay;    // Délai avant le démarrage de la partie (reset à chaque appui sur start)
-
-short currentMaxPlayers;  // Nombre de joueurs maximum pour la partie (incrémente à chaque appui start)
-short playerTurn;         // id du joueur qui joue
-```
-
 ## Docs
 ![Schema](https://github.com/Erinell/Flipper/blob/master/docs/img/Schematic_Flipper_2022-10-21.png?raw=true)
