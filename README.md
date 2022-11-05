@@ -26,7 +26,7 @@ A    | OUT  | D11
 B    | OUT  | D12
 
 
-HUB75 brochage
+<!-- HUB75 brochage
 Nom | Mode | Pin
 ----|------|----
 G1  | OUT  | 26
@@ -42,7 +42,7 @@ D   | OUT  | A3
 LAT | OUT  | D10
 CLK | OUT  | D11
 OE  | OUT  | D9
-GND | -    | GND
+GND | -    | GND -->
 
 ## Hardware
 
