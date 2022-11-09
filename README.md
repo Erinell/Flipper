@@ -18,13 +18,13 @@ ballEjection  | OUT  | ?
 HUB12 brochage
 Nom  | Mode | Pin
 -----|------|----
-OE   | OUT  | D7
+OE   | OUT  | D9
 SCLK | OUT  | D8
-CKL  | OUT  | D9
-R    | OUT  | D10
-A    | OUT  | D11
-B    | OUT  | D12
-
+CLK  | OUT  | D13
+R    | OUT  | D11
+A    | OUT  | D6
+B    | OUT  | D7
+C    | OUT  | -
 
 <!-- HUB75 brochage
 Nom | Mode | Pin
