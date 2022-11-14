@@ -22,6 +22,7 @@ public:
   short detectedBalls();
   void increaseScore(int points);
   unsigned long getScore();
+  String getScoreString();
   void setEndGame(bool endGame);
   bool isOut();
 };

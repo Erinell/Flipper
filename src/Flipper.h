@@ -15,7 +15,13 @@ private:
   bool maxPlayersUpdated;
   bool scoreUpdated;
   bool ballDetected;
-  Player players[];
+  Player players[5] = {
+    Player(0),
+    Player(1),
+    Player(2),
+    Player(3),
+    Player(4),
+  };
 
 public:
   /*

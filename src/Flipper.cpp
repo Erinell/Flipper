@@ -67,7 +67,7 @@ bool Flipper::canStart()
 
 void Flipper::updatePlayer()
 {
-  for (uint16_t i = 0; i < this->currentMaxPlayers; i++)
+  for (uint16_t i = 0; i <= this->currentMaxPlayers; i++)
   {
     this->players[i] = Player(i);
   }

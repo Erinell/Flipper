@@ -31,7 +31,15 @@ unsigned long Player::getScore()
   return this->score;
 }
 
-void Player::setEndGame(bool endGame){
+String Player::getScoreString()
+{
+ char score[8];
+ sprintf(score, "%07lu", this->score);
+  return score;
+}
+
+void Player::setEndGame(bool endGame)
+{
   this->endGame = endGame;
 }
 
