@@ -5,7 +5,7 @@
 #define points1000      26  // Entrée Digitale
 #define points10000     28  // Entrée Digitale
 #define credits         -1  // Entrée Digitale
-#define start           -1  // Entrée Digitale
+#define start           22  // Entrée Digitale
 #define ballDetection   30  // Entrée Digitale
 
 // ------------ Solenoides ------------

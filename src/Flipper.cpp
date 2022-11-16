@@ -96,6 +96,14 @@ bool Flipper::isBallDetected()
   return false;
 }
 
+Player Flipper::getPlayer(size_t i){
+  return this->players[i];
+}
+
+Player* Flipper::getPlayers(){
+  return this->players;
+}
+
 Player Flipper::currentPlayer()
 {
   return this->players[this->playerTurn];
@@ -123,7 +131,8 @@ short Flipper::getMaxPlayer()
   return this->currentMaxPlayers;
 }
 
-short Flipper::getTimer(){
+short Flipper::getTimer()
+{
   return this->startDelay - (millis() - this->timer);
 }
 
@@ -165,6 +174,11 @@ void Flipper::updateScore()
     }
   }
   delay(50);
+}
+
+bool Flipper::isAllPlayerOut()
+{
+  return this->allPlayersOut;
 }
 
 void Flipper::ejection()

@@ -15,13 +15,9 @@ const unsigned short startDelay = 5000;
 
 Flipper flipper(maxPlayers, maxTry, startDelay);
 
-void setup()
+void initGame()
 {
   flipper.init();
-
-  Serial.begin(9600);
-  display.setBrightness(20);
-  display.begin();
 
   while (!flipper.isBallDetected())
   {
@@ -34,9 +30,9 @@ void setup()
 
   while (!flipper.canStart())
   {
-  //   Serial.print(flipper.getMaxPlayer());
-  //   Serial.print(", ");
-  //   Serial.println(round(flipper.getTimer() / 990));
+    //   Serial.print(flipper.getMaxPlayer());
+    //   Serial.print(", ");
+    //   Serial.println(round(flipper.getTimer() / 990));
     display.selectFont(System5x7);
     display.drawString(14, 1, String(round(flipper.getTimer() / 990)));
     display.selectFont(System4x5);
@@ -47,6 +43,16 @@ void setup()
   flipper.updatePlayer();
 
   display.clearScreen();
+}
+
+void setup()
+{
+
+  Serial.begin(9600);
+  display.setBrightness(20);
+  display.begin();
+
+  initGame();
 }
 
 void loop()
@@ -60,13 +66,13 @@ void loop()
   display.drawString(9, 10, String(currentPlayer.getId()));
   display.drawString(24, 10, "B2");
 
-  //Serial.print("Joueur ");
-  //Serial.print(currentPlayer.getId());
-  //Serial.print(" : ");
-  //Serial.print(currentPlayer.getScore());
-  //Serial.print(" points, ");
-  //Serial.print(currentPlayer.detectedBalls());
-  //Serial.println(" coups");
+  // Serial.print("Joueur ");
+  // Serial.print(currentPlayer.getId());
+  // Serial.print(" : ");
+  // Serial.print(currentPlayer.getScore());
+  // Serial.print(" points, ");
+  // Serial.print(currentPlayer.detectedBalls());
+  // Serial.println(" coups");
 
   if (!flipper.isBallDetected())
   {
@@ -81,10 +87,27 @@ void loop()
   if (currentPlayer.detectedBalls() >= flipper.getMaxTry())
   {
     currentPlayer.setEndGame(true);
+
     while (currentPlayer.isOut())
     {
       flipper.nextPlayer();
       // TODO : fin de partie quand tout les joueurs ont fini.
+    }
+
+    short playersOut = 0;
+    for (size_t i = 0; i < sizeof(flipper.getPlayers()); i++)
+    {
+      Player p = flipper.getPlayer(i);
+
+      if (p.isOut())
+      {
+        playersOut++;
+      }
+
+      if (playersOut >= flipper.getMaxPlayer())
+      {
+        // les joueurs ont fini
+      }
     }
   }
 
