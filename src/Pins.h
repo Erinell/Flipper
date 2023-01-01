@@ -7,7 +7,8 @@
 #define points10000     51
 #define credits         -1
 #define start           48
-#define ballDetection   49
+#define tilt            34  // input 1 si flipper basculé
+#define ballDetection   49  // input 1 si bille dans rail prêt à tirer
 
 #define bonus150        42
 #define bonus250        40
@@ -19,7 +20,7 @@
 #define led1500         37
 // ------------ Solenoides ------------
 
-#define ballEjection    A0  // Sortie analogique
+#define ballEjection    A0  // Output 1 pour tirer
 
 // ------------ Matrice LED HUB12 ------------
 #ifdef HUB12

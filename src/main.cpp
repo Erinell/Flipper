@@ -89,15 +89,15 @@ void setup()
 void showScore(int x, int y, Player p, uint16_t color)
 {
   String score = p.getScoreString();
-    display.setTextColor(color, BLACK);
-    display.setCursor(x, y);
-    display.print(score.substring(0, 3));
-    display.drawPixel(x + 18, y + 6, color);
-    display.setCursor(x + 20, y);
-    display.print(score.substring(3, 6));
-    display.drawPixel(x + 38, y + 6, color);
-    display.setCursor(x + 40, y);
-    display.print(score.substring(6));
+  display.setTextColor(color, BLACK);
+  display.setCursor(x, y);
+  display.print(score.substring(0, 3));
+  display.drawPixel(x + 18, y + 6, color);
+  display.setCursor(x + 20, y);
+  display.print(score.substring(3, 6));
+  display.drawPixel(x + 38, y + 6, color);
+  display.setCursor(x + 40, y);
+  display.print(score.substring(6));
 }
 
 void showPlayers(int x, int y, bool end = false)
@@ -129,24 +129,41 @@ void showPlayers(int x, int y, bool end = false)
     return;
   }
 
-  short highScore = -1;
   display.fillRect(x * flipper.currentPlayer().getId() + 3, y - 5, 6, 4, BLACK);
 
+  // fonction getWinnerId
+  // ----- A DEBUG -----
+  int8_t tempWinner = -1;
   for (uint8_t i = 0; i < flipper.getMaxPlayer(); i++)
   {
-    if (flipper.getPlayer(i).getScore() > flipper.getPlayer(i + 1).getScore())
+    uint8_t nextId = i + 1;
+    if (nextId >= flipper.getMaxPlayer())
     {
-      highScore = i;
+      nextId = 0;
     }
-
-    if (flipper.getPlayer(i).getScore() <= flipper.getPlayer(i + 1).getScore())
+    if (flipper.getPlayer(i).getScore() > flipper.getPlayer(nextId).getScore())
     {
-      display.drawBitmap(x * i + 2, y, teteSad, 8, 10, RED, BLACK);
+      tempWinner = i;
+      continue;
     }
+    tempWinner = nextId;
   }
-  if (highScore > -1)
+  flipper.setWinnerId(tempWinner);
+  delay(50);
+  // --------------------
+
+
+  if (flipper.getWinnerId() > -1)
   {
-    display.drawBitmap(x * highScore + 2, y, tete, 8, 10, GREEN, BLACK);
+    for (uint8_t i = 0; i < flipper.getMaxPlayer(); i++)
+    {
+      if (flipper.getWinnerId() != i)
+      {
+        display.drawBitmap(x * i + 2, y, teteSad, 8, 10, RED, BLACK);
+        continue;
+      }
+      display.drawBitmap(x * flipper.getWinnerId() + 2, y, tete, 8, 10, GREEN, BLACK);
+    }
   }
 }
 
@@ -193,7 +210,7 @@ void loop()
     display.setTextColor(BLUE, BLACK);
     display.setCursor(22, 11);
     display.print("FIN!");
-    showScore(4, 2, currentPlayer, YELLOW);
+    showScore(4, 2, flipper.getPlayer(flipper.getWinnerId()), YELLOW);
     showPlayers(15, 20, true);
   }
 }

@@ -113,12 +113,16 @@ bool Flipper::isBallDetected()
   return false;
 }
 
+bool Flipper::isTilted()
+{
+}
+
 bool Flipper::startPressed()
 {
   return digitalRead(start);
 }
 
-Player Flipper::getPlayer(size_t i)
+Player Flipper::getPlayer(uint8_t i)
 {
   return this->players[i];
 }
@@ -265,8 +269,19 @@ void Flipper::resetBonus()
   digitalWrite(led1500, LOW);
 }
 
-void Flipper::setPlayerOut(size_t i) {
+void Flipper::setPlayerOut(uint8_t i)
+{
   this->players[i].setEndGame(true);
+}
+
+void Flipper::setWinnerId(int8_t id)
+{
+  this->winnerId = id;
+}
+
+int8_t Flipper::getWinnerId()
+{
+  return this->winnerId;
 }
 
 void Flipper::ejection()

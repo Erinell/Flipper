@@ -10,6 +10,7 @@ private:
 
   unsigned short currentMaxPlayers = 0;
   unsigned short playerTurn = 0;
+  short winnerId = -1;
 
   long timer = 0;
   bool maxPlayersUpdated;
@@ -38,16 +39,18 @@ public:
   void updateScore();
 
   bool isBallDetected();
+  bool isTilted();
   bool startPressed();
   Player currentPlayer();
-  Player getPlayer(size_t i);
+  Player getPlayer(uint8_t i);
   Player* getPlayers();
   void nextPlayer();
   short getMaxTry();
   unsigned short getMaxPlayer();
   short getTimer();
   void resetBonus();
-  void setPlayerOut(size_t i);
-
+  void setPlayerOut(uint8_t i);
+  void setWinnerId(int8_t id);
+  int8_t getWinnerId();
   void ejection();
 };
