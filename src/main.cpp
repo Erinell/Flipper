@@ -1,13 +1,20 @@
 #include <Arduino.h>
 #include <SPI.h>
-#include <DMD2.h>
-#include <Font/SystemFont4x5.h>
-#include <Font/SystemFont5x7.h>
+#include <Pins.h>
+
+// #include <DMD2.h>
+// #include <Font/SystemFont4x5.h>
+// #include <Font/SystemFont5x7.h>
+#include <Colors.h>
+#include <RGBmatrixPanel.h>
+#include <Fonts/FreeSans9pt7b.h>
 // Flipper
 #include <Flipper.h>
 #include <Player.h>
 
-SoftDMD display(1, 1);
+// SoftDMD display(1, 1);
+
+RGBmatrixPanel display(A, B, C, D, CLK, LAT, OE, false, 64);
 
 const unsigned short maxPlayers = 4;
 const unsigned short maxTry = 3;
@@ -15,44 +22,132 @@ const unsigned short startDelay = 5000;
 
 Flipper flipper(maxPlayers, maxTry, startDelay);
 
+void (*resetFunc)(void) = 0; // fonction reset
+
+const unsigned char tete[] PROGMEM = {
+    // 'tete, 8x10px
+    0x3c, 0x42, 0x81, 0xa5, 0x81, 0x81, 0xa5, 0x99, 0x42, 0x3c};
+
+const unsigned char teteSad[] PROGMEM = {
+    // 'tete_sad, 8x10px
+    0x3c, 0x42, 0x81, 0xa5, 0x81, 0x81, 0xbd, 0x81, 0x42, 0x3c
+    // 0x3c, 0x42, 0x81, 0xa5, 0x81, 0x81, 0x99, 0xa5, 0x42, 0x3c
+};
+
+const unsigned char selector[] PROGMEM = {
+    // 'selector', 6x4px
+    0x84, 0xcc, 0x78, 0x30};
+
 void initGame()
 {
+
   flipper.init();
 
+  display.setTextColor(RED);
   while (!flipper.isBallDetected())
   {
-    display.selectFont(System4x5);
-    display.drawString(4, 1, "PAS DE");
-    display.drawString(6, 10, "BALLE");
+    display.setCursor(0, 13);
+    display.print("Aucune");
+    display.setCursor(12, 29);
+    display.print("Balle");
   }
-
-  display.clearScreen();
+  display.fillScreen(BLACK);
+  display.setFont();
+  display.setTextColor(GREEN, BLACK);
 
   while (!flipper.canStart())
   {
-    //   Serial.print(flipper.getMaxPlayer());
-    //   Serial.print(", ");
-    //   Serial.println(round(flipper.getTimer() / 990));
-    display.selectFont(System5x7);
-    display.drawString(14, 1, String(round(flipper.getTimer() / 990)));
-    display.selectFont(System4x5);
-    display.drawString(1, 10, "J:");
-    display.drawString(9, 10, String(flipper.getMaxPlayer()));
+    display.setTextSize(2);
+    display.setCursor(27, 1);
+    display.print(String(round(flipper.getTimer() / 990)));
+
+    display.setTextSize(1);
+    display.setCursor(5, 20);
+    display.print("Joueurs:");
+    display.print(String(flipper.getMaxPlayer()));
   }
 
   flipper.updatePlayer();
 
-  display.clearScreen();
+  // display.clearScreen();
+  display.fillScreen(BLACK);
+  display.drawRect(0, 0, 64, 32, BLUE);
 }
 
 void setup()
 {
-
   Serial.begin(9600);
-  display.setBrightness(20);
   display.begin();
+  display.fillScreen(BLACK);
+  display.setTextWrap(false);
+  display.setFont(&FreeSans9pt7b);
+  display.setTextSize(1);
 
   initGame();
+}
+
+void showScore(int x, int y, Player p, uint16_t color)
+{
+  String score = p.getScoreString();
+    display.setTextColor(color, BLACK);
+    display.setCursor(x, y);
+    display.print(score.substring(0, 3));
+    display.drawPixel(x + 18, y + 6, color);
+    display.setCursor(x + 20, y);
+    display.print(score.substring(3, 6));
+    display.drawPixel(x + 38, y + 6, color);
+    display.setCursor(x + 40, y);
+    display.print(score.substring(6));
+}
+
+void showPlayers(int x, int y, bool end = false)
+{
+  if (!end)
+  {
+    for (size_t i = 0; i < flipper.getMaxPlayer(); i++)
+    {
+      display.setTextColor(CYAN, BLACK);
+      display.setCursor(x * i + 11, y + 2);
+      display.print(flipper.getMaxTry() - flipper.getPlayer(i).detectedBalls());
+
+      if (flipper.getPlayer(i).isOut() && !end)
+      {
+        display.drawBitmap(x * i + 2, y, tete, 8, 10, ORANGE, BLACK);
+      }
+
+      if (!flipper.getPlayer(i).isOut())
+      {
+        display.drawBitmap(x * i + 2, y, tete, 8, 10, GREEN, BLACK);
+      }
+
+      display.fillRect(x * i + 3, y - 5, 6, 4, BLACK);
+      if (flipper.currentPlayer().getId() != i)
+        continue;
+
+      display.drawBitmap(x * i + 3, y - 5, selector, 6, 4, BLUE, BLACK);
+    }
+    return;
+  }
+
+  short highScore = -1;
+  display.fillRect(x * flipper.currentPlayer().getId() + 3, y - 5, 6, 4, BLACK);
+
+  for (uint8_t i = 0; i < flipper.getMaxPlayer(); i++)
+  {
+    if (flipper.getPlayer(i).getScore() > flipper.getPlayer(i + 1).getScore())
+    {
+      highScore = i;
+    }
+
+    if (flipper.getPlayer(i).getScore() <= flipper.getPlayer(i + 1).getScore())
+    {
+      display.drawBitmap(x * i + 2, y, teteSad, 8, 10, RED, BLACK);
+    }
+  }
+  if (highScore > -1)
+  {
+    display.drawBitmap(x * highScore + 2, y, tete, 8, 10, GREEN, BLACK);
+  }
 }
 
 void loop()
@@ -61,55 +156,44 @@ void loop()
 
   flipper.updateScore();
 
-  display.drawString(1, 1, currentPlayer.getScoreString());
-  display.drawString(1, 10, "J:");
-  display.drawString(9, 10, String(currentPlayer.getId()));
-  display.drawString(24, 10, "B2");
-
-  // Serial.print("Joueur ");
-  // Serial.print(currentPlayer.getId());
-  // Serial.print(" : ");
-  // Serial.print(currentPlayer.getScore());
-  // Serial.print(" points, ");
-  // Serial.print(currentPlayer.detectedBalls());
-  // Serial.println(" coups");
-
-  if (!flipper.isBallDetected())
+  unsigned short playersOut = 0;
+  for (size_t i = 0; i < flipper.getMaxPlayer(); i++)
   {
-    return;
+    if (flipper.getPlayer(i).detectedBalls() >= flipper.getMaxTry())
+    {
+      flipper.setPlayerOut(i);
+      playersOut++;
+    }
   }
+
+  showScore(4, 2, currentPlayer, YELLOW);
+  showPlayers(15, 20);
 
   if (currentPlayer.detectedBalls() < flipper.getMaxTry())
   {
+    if (!flipper.isBallDetected())
+    {
+      return;
+    }
+    flipper.resetBonus();
     flipper.nextPlayer();
+    // while (flipper.isBallDetected())
+    //{
+    //   Serial.println("attente start");
+    //   if (flipper.startPressed())
+    //   {
+    //     flipper.ejection();
+    //     return;
+    //   }
+    // }
   }
 
-  if (currentPlayer.detectedBalls() >= flipper.getMaxTry())
+  while (playersOut >= flipper.getMaxPlayer())
   {
-    currentPlayer.setEndGame(true);
-
-    while (currentPlayer.isOut())
-    {
-      flipper.nextPlayer();
-      // TODO : fin de partie quand tout les joueurs ont fini.
-    }
-
-    short playersOut = 0;
-    for (size_t i = 0; i < sizeof(flipper.getPlayers()); i++)
-    {
-      Player p = flipper.getPlayer(i);
-
-      if (p.isOut())
-      {
-        playersOut++;
-      }
-
-      if (playersOut >= flipper.getMaxPlayer())
-      {
-        // les joueurs ont fini
-      }
-    }
+    display.setTextColor(BLUE, BLACK);
+    display.setCursor(22, 11);
+    display.print("FIN!");
+    showScore(4, 2, currentPlayer, YELLOW);
+    showPlayers(15, 20, true);
   }
-
-  flipper.ejection();
 }

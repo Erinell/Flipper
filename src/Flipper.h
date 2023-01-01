@@ -15,7 +15,6 @@ private:
   bool maxPlayersUpdated;
   bool scoreUpdated;
   bool ballDetected;
-  bool allPlayersOut = false;
   Player players[5] = {
     Player(0),
     Player(1),
@@ -39,14 +38,16 @@ public:
   void updateScore();
 
   bool isBallDetected();
+  bool startPressed();
   Player currentPlayer();
   Player getPlayer(size_t i);
   Player* getPlayers();
   void nextPlayer();
   short getMaxTry();
-  short getMaxPlayer();
+  unsigned short getMaxPlayer();
   short getTimer();
-  bool isAllPlayerOut();
+  void resetBonus();
+  void setPlayerOut(size_t i);
 
   void ejection();
 };

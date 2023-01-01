@@ -15,38 +15,38 @@ ballEjection  | OUT  | ?
 
 ### Matrice LED
 
-HUB12 brochage
+<!-- HUB12 brochage
 Nom  | Mode | Pin
------|------|----
+-----|------|------
 OE   | OUT  | D9
 SCLK | OUT  | D8
 CLK  | OUT  | D13
-R    | OUT  | D11
+R    | OUT  | D10
 A    | OUT  | D6
 B    | OUT  | D7
-C    | OUT  | -
+C    | OUT  | - -->
 
-<!-- HUB75 brochage
+HUB75 brochage
 Nom | Mode | Pin
 ----|------|----
-G1  | OUT  | 26
-G2  | OUT  | 29
-R1  | OUT  | 24
-R2  | OUT  | 27
-B1  | OUT  | 25
-B2  | OUT  | 28
-A   | OUT  | A0
-B   | OUT  | A1
-C   | OUT  | A2
-D   | OUT  | A3
-LAT | OUT  | D10
-CLK | OUT  | D11
+G1  | OUT  | D25
+G2  | OUT  | D28
+R1  | OUT  | D24
+R2  | OUT  | D27
+B1  | OUT  | D26
+B2  | OUT  | D29
+A   | OUT  | A7
+B   | OUT  | A8
+C   | OUT  | A9
+D   | OUT  | A10
+LAT | SPI  | D10
+CLK | SPI  | D11
 OE  | OUT  | D9
-GND | -    | GND -->
+GND | -    | GND
 
 ## Hardware
 
-- Afficheur LED 32*16 P10
+- Afficheur LED 64x32 P5
 <!-- [https://circuitdigest.com/microcontroller-projects/digital-notice-board-using-p10-led-matrix-display-and-arduino] -->
 <!-- matrice pins standard : [https://www.hackster.io/Maddy/using-the-dfrobot-rgb-led-matrix-921141] -->
 - Arduino mega 2560

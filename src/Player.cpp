@@ -34,7 +34,7 @@ unsigned long Player::getScore()
 String Player::getScoreString()
 {
  char score[8];
- sprintf(score, "%07lu", this->score);
+ sprintf(score, "%09lu", this->score);
   return score;
 }
 
