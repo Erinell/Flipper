@@ -24,6 +24,7 @@ void Flipper::init()
   pinMode(credits, INPUT);
   pinMode(start, INPUT);
   pinMode(ballDetection, INPUT);
+  pinMode(tilt, INPUT);
   pinMode(ballEjection, OUTPUT);
 
   // debug LED
@@ -115,6 +116,12 @@ bool Flipper::isBallDetected()
 
 bool Flipper::isTilted()
 {
+  if (digitalRead(tilt))
+  {
+    this->players[this->playerTurn].addDetectedBall();
+    return true;
+  }
+  return false;
 }
 
 bool Flipper::startPressed()
@@ -274,9 +281,26 @@ void Flipper::setPlayerOut(uint8_t i)
   this->players[i].setEndGame(true);
 }
 
-void Flipper::setWinnerId(int8_t id)
+void Flipper::updateWinnerId()
 {
-  this->winnerId = id;
+  for (uint8_t i = 0; i < this->currentMaxPlayers; i++)
+  {
+    uint8_t nextId = i + 1;
+    if (nextId >= this->currentMaxPlayers - 1)
+    {
+      nextId = 0;
+    }
+    Serial.print(this->players[i].getScore());
+    Serial.print(" ");
+    Serial.println(this->players[nextId].getScore());
+
+    bool isSolo = (this->currentMaxPlayers == 1 && this->players[this->playerTurn].getScore() > 0);
+    if (this->players[i].getScore() > this->players[nextId].getScore() || isSolo)
+    {
+      this->winnerId = i;
+      continue;
+    }
+  }
 }
 
 int8_t Flipper::getWinnerId()

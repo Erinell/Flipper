@@ -10,7 +10,7 @@ private:
 
   unsigned short currentMaxPlayers = 0;
   unsigned short playerTurn = 0;
-  short winnerId = -1;
+  int8_t winnerId = -1;
 
   long timer = 0;
   bool maxPlayersUpdated;
@@ -50,7 +50,7 @@ public:
   short getTimer();
   void resetBonus();
   void setPlayerOut(uint8_t i);
-  void setWinnerId(int8_t id);
+  void updateWinnerId();
   int8_t getWinnerId();
   void ejection();
 };
