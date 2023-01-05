@@ -15,7 +15,7 @@ const unsigned short startDelay = 5000;
 
 Flipper flipper(maxPlayers, maxTry, startDelay);
 
-void (*resetFunc)(void) = 0; // fonction reset
+// void (*resetFunc)(void) = 0; // fonction reset
 
 const unsigned char tete[] PROGMEM = {
     // 'tete, 8x10px
@@ -69,6 +69,9 @@ void initGame()
 
 void setup()
 {
+  digitalWrite(reset, HIGH);
+
+  Serial.begin(9600);
   display.begin();
   display.fillScreen(BLACK);
   display.setTextWrap(false);
@@ -152,6 +155,8 @@ void loop()
     display.print("Bascul");
     display.drawChar(48, 13, 0x82, RED, BLACK, 1);
     delay(3000);
+    // blocage batteur
+
     // if (flipper.getMaxPlayer() <= 1)
     // {
     //   resetFunc();
@@ -182,15 +187,6 @@ void loop()
     }
     flipper.resetBonus();
     flipper.nextPlayer();
-    // while (flipper.isBallDetected())
-    //{
-    //   Serial.println("attente start");
-    //   if (flipper.startPressed())
-    //   {
-    //     flipper.ejection();
-    //     return;
-    //   }
-    // }
   }
 
   while (playersOut >= flipper.getMaxPlayer())
@@ -198,9 +194,10 @@ void loop()
     display.setTextColor(BLUE, BLACK);
     display.setCursor(22, 11);
     display.print("FIN!");
-    showScore(4, 2, flipper.getPlayer(flipper.getWinnerId() > -1 ? flipper.getWinnerId() : 0).getScoreString(), YELLOW);
     showPlayers(15, 20, true);
+    showScore(4, 2, flipper.getPlayer(flipper.getWinnerId()).getScoreString(), YELLOW);
+    
     delay(5000);
-    resetFunc();
+    digitalWrite(reset, LOW);
   }
 }

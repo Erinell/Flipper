@@ -26,6 +26,7 @@ void Flipper::init()
   pinMode(ballDetection, INPUT);
   pinMode(tilt, INPUT);
   pinMode(ballEjection, OUTPUT);
+  pinMode(reset, OUTPUT);
 
   // debug LED
   pinMode(led150, OUTPUT);
@@ -285,27 +286,17 @@ void Flipper::updateWinnerId()
 {
   for (uint8_t i = 0; i < this->currentMaxPlayers; i++)
   {
-    uint8_t nextId = i + 1;
-    if (nextId >= this->currentMaxPlayers - 1)
-    {
-      nextId = 0;
-    }
-    Serial.print(this->players[i].getScore());
-    Serial.print(" ");
-    Serial.println(this->players[nextId].getScore());
-
     bool isSolo = (this->currentMaxPlayers == 1 && this->players[this->playerTurn].getScore() > 0);
-    if (this->players[i].getScore() > this->players[nextId].getScore() || isSolo)
+    if (this->players[i].getScore() > this->players[this->winnerId].getScore() || isSolo)
     {
       this->winnerId = i;
-      continue;
     }
   }
 }
 
 int8_t Flipper::getWinnerId()
 {
-  return this->winnerId;
+  return this->winnerId > -1 ? this->winnerId : 0;
 }
 
 void Flipper::ejection()

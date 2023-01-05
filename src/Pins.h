@@ -9,6 +9,7 @@
 #define start           48
 #define tilt            34  // input 1 si flipper basculé
 #define ballDetection   49  // input 1 si bille dans rail prêt à tirer
+#define reset           8
 
 #define bonus150        42
 #define bonus250        40
@@ -18,6 +19,8 @@
 #define led250          41
 #define led750          39
 #define led1500         37
+
+
 // ------------ Solenoides ------------
 
 #define ballEjection    A0  // Output 1 pour tirer
