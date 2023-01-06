@@ -118,7 +118,7 @@ void showPlayers(int x, int y, bool end = false)
     return;
   }
 
-  display.fillRect(x * 0 + 3, y - 5, 51, 4, BLACK); // A FIX
+  display.fillRect(x * 0 + 3, y - 5, 51, 4, BLACK);
 
   for (uint8_t i = 0; i < flipper.getMaxPlayer(); i++)
   {
@@ -141,8 +141,8 @@ void tilted()
   display.setCursor(12, 13);
   display.print("Bascul");
   display.drawChar(48, 13, 0x82, RED, BLACK, 1);
-  delay(3000);
-  // blocage batteurs
+
+  delay(3000); // blocage batteurs, temps pour simuler la chute de la bille
 
   flipper.resetBonus();
   flipper.nextPlayer();
@@ -161,8 +161,12 @@ void endgame()
   display.setCursor(22, 11);
   display.print("FIN!");
 
-  delay(60000); // temps pour simuler la chute de la bille
+  delay(10000); // un certains temps avant reset
   digitalWrite(reset, LOW);
+  while (true) // boucle (temporaire) anti retour
+  {
+  }
+  
 }
 
 void loop()
@@ -188,9 +192,10 @@ void loop()
     }
     flipper.resetBonus();
     flipper.nextPlayer();
+    return;
   }
 
-  while (flipper.getPlayersOut() >= flipper.getMaxPlayer())
+  if (flipper.getPlayersOut() >= flipper.getMaxPlayer())
   {
     endgame();
   }
