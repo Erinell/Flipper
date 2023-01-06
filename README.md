@@ -4,45 +4,38 @@
 
 Nom           | Mode | Pin
 --------------|------|----
-points10      | IN   | D40
-points100     | IN   | D41
-points1000    | IN   | D42
-points10000   | IN   | D43
-credits       | IN   | D44
-start         | IN   | D45
-ballDetection | IN   | D46
-ballEjection  | OUT  | ?
+reset         | OUT  | D8
+bonus1500     | IN   | D36
+led1500       | OUT  | D37
+bonus750      | IN   | D38
+led750        | OUT  | D39
+bonus250      | IN   | D40
+led250        | OUT  | D41
+bonus150      | IN   | D42
+led150        | OUT  | D43
+start         | IN   | D48
+ballDetection | IN   | D49
+points1000    | IN   | D50
+points10000   | IN   | D51
+points10      | IN   | D52
+points100     | IN   | D53
+credits       | IN   | -1
+
+ballEjection  | OUT  | A0
 
 ### Matrice LED
-
-<!-- HUB12 brochage
-Nom  | Mode | Pin
------|------|------
-OE   | OUT  | D9
-SCLK | OUT  | D8
-CLK  | OUT  | D13
-R    | OUT  | D10
-A    | OUT  | D6
-B    | OUT  | D7
-C    | OUT  | - -->
-
 HUB75 brochage
-Nom | Mode | Pin
-----|------|----
-G1  | OUT  | D25
-G2  | OUT  | D28
-R1  | OUT  | D24
-R2  | OUT  | D27
-B1  | OUT  | D26
-B2  | OUT  | D29
-A   | OUT  | A7
-B   | OUT  | A8
-C   | OUT  | A9
-D   | OUT  | A10
-LAT | SPI  | D10
-CLK | SPI  | D11
-OE  | OUT  | D9
-GND | -    | GND
+
+ 1  | Pin | Pin | 2
+----|-----|-----|----
+R1  | D24 | D25 | G1
+B1  | D26 | GND | GND
+R2  | D27 | D28 | G2
+B2  | D29 | GND | GND
+A   | A7  | A8  | B
+C   | A9  | A10 | D
+CLK | D11 | D10 | LAT
+OE  | D9  | GND | GND
 
 ## Hardware
 
