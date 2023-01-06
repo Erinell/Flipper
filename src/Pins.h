@@ -25,16 +25,6 @@
 
 #define ballEjection    A0  // Output 1 pour tirer
 
-// ------------ Matrice LED HUB12 ------------
-#ifdef HUB12
-#define A               6
-#define B               7
-#define SCLK            8
-#define OE              9
-#define R               10
-#define CKL             13
-#endif
-
 // ------------ Matrice LED HUB75 ------------
 #ifdef HUB75
 #define CLK 11
