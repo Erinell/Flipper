@@ -1,12 +1,12 @@
 #include "Player.h"
 #include <Arduino.h>
 
-Player::Player(unsigned short id)
+Player::Player(uint8_t id)
 {
   this->id = id;
 }
 
-unsigned short Player::getId()
+uint8_t Player::getId()
 {
   return this->id;
 }
@@ -16,7 +16,7 @@ void Player::addDetectedBall()
   this->ballsDetected++;
 }
 
-short Player::detectedBalls()
+uint8_t Player::detectedBalls()
 {
   return this->ballsDetected;
 }

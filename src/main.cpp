@@ -9,11 +9,7 @@
 
 RGBmatrixPanel display(A, B, C, D, CLK, LAT, OE, false, 64);
 
-const unsigned short maxPlayers = 4;
-const unsigned short maxTry = 3;
-const unsigned short startDelay = 5000;
-
-Flipper flipper(maxPlayers, maxTry, startDelay);
+Flipper flipper(MAX_PLAYERS, MAX_TRY, START_DELAY);
 
 // void (*resetFunc)(void) = 0; // fonction reset
 
@@ -35,7 +31,6 @@ const unsigned char selector[] PROGMEM = {
 
 void initGame()
 {
-
   flipper.init();
 
   display.setTextColor(RED);
@@ -123,9 +118,7 @@ void showPlayers(int x, int y, bool end = false)
     return;
   }
 
-  display.fillRect(x * flipper.currentPlayer().getId() + 3, y - 5, 6, 4, BLACK);
-
-  flipper.updateWinnerId();
+  display.fillRect(x * 0 + 3, y - 5, 51, 4, BLACK); // A FIX
 
   for (uint8_t i = 0; i < flipper.getMaxPlayer(); i++)
   {
@@ -138,6 +131,40 @@ void showPlayers(int x, int y, bool end = false)
   }
 }
 
+void tilted()
+{
+  display.fillRect(1, 1, 62, 30, BLACK);
+  display.setTextColor(RED, BLACK);
+  display.setTextSize(1);
+  display.setCursor(12, 2);
+  display.print("Flipper");
+  display.setCursor(12, 13);
+  display.print("Bascul");
+  display.drawChar(48, 13, 0x82, RED, BLACK, 1);
+  delay(3000);
+  // blocage batteurs
+
+  flipper.resetBonus();
+  flipper.nextPlayer();
+  display.fillRect(1, 1, 62, 30, BLACK);
+}
+
+void endgame()
+{
+  flipper.updateWinnerId();
+  flipper.nextPlayer();
+
+  showPlayers(15, 20, true);
+  showScore(4, 2, flipper.getPlayer(flipper.getWinnerId()).getScoreString(), YELLOW);
+
+  display.setTextColor(BLUE, BLACK);
+  display.setCursor(22, 11);
+  display.print("FIN!");
+
+  delay(60000); // temps pour simuler la chute de la bille
+  digitalWrite(reset, LOW);
+}
+
 void loop()
 {
   Player currentPlayer = flipper.currentPlayer();
@@ -146,39 +173,13 @@ void loop()
 
   if (flipper.isTilted())
   {
-    display.fillRect(1, 1, 62, 30, BLACK);
-    display.setTextColor(RED, BLACK);
-    display.setTextSize(1);
-    display.setCursor(12, 2);
-    display.print("Flipper");
-    display.setCursor(12, 13);
-    display.print("Bascul");
-    display.drawChar(48, 13, 0x82, RED, BLACK, 1);
-    delay(3000);
-    // blocage batteur
-
-    // if (flipper.getMaxPlayer() <= 1)
-    // {
-    //   resetFunc();
-    // }
-
-    flipper.nextPlayer();
-    display.fillRect(1, 1, 62, 30, BLACK);
-  }
-
-  unsigned short playersOut = 0;
-  for (size_t i = 0; i < flipper.getMaxPlayer(); i++)
-  {
-    if (flipper.getPlayer(i).detectedBalls() >= flipper.getMaxTry())
-    {
-      flipper.setPlayerOut(i);
-      playersOut++;
-    }
+    tilted();
   }
 
   showScore(4, 2, currentPlayer.getScoreString(), YELLOW);
   showPlayers(15, 20);
 
+  // bille perdue
   if (currentPlayer.detectedBalls() < flipper.getMaxTry())
   {
     if (!flipper.isBallDetected())
@@ -189,15 +190,8 @@ void loop()
     flipper.nextPlayer();
   }
 
-  while (playersOut >= flipper.getMaxPlayer())
+  while (flipper.getPlayersOut() >= flipper.getMaxPlayer())
   {
-    display.setTextColor(BLUE, BLACK);
-    display.setCursor(22, 11);
-    display.print("FIN!");
-    showPlayers(15, 20, true);
-    showScore(4, 2, flipper.getPlayer(flipper.getWinnerId()).getScoreString(), YELLOW);
-    
-    delay(5000);
-    digitalWrite(reset, LOW);
+    endgame();
   }
 }

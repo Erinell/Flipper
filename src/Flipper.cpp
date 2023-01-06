@@ -2,7 +2,7 @@
 #include <Arduino.h>
 #include <Pins.h>
 
-Flipper::Flipper(unsigned short maxPlayers, unsigned short maxTry, unsigned short startDelay)
+Flipper::Flipper(uint8_t maxPlayers, uint8_t maxTry, uint32_t startDelay)
 {
   this->maxPlayers = maxPlayers;
   this->maxTry = maxTry;
@@ -162,12 +162,12 @@ short Flipper::getMaxTry()
   return this->maxTry;
 }
 
-unsigned short Flipper::getMaxPlayer()
+uint8_t Flipper::getMaxPlayer()
 {
   return this->currentMaxPlayers;
 }
 
-short Flipper::getTimer()
+long Flipper::getTimer()
 {
   return this->startDelay - (millis() - this->timer);
 }
@@ -277,9 +277,24 @@ void Flipper::resetBonus()
   digitalWrite(led1500, LOW);
 }
 
-void Flipper::setPlayerOut(uint8_t i)
+uint8_t Flipper::getPlayersOut()
 {
-  this->players[i].setEndGame(true);
+  this->playersOut = 0;
+  for (size_t i = 0; i < this->currentMaxPlayers; i++)
+  {
+    if (this->players[i].detectedBalls() >= this->maxTry)
+    {
+      this->players[i].setEndGame(true);
+
+      this->playersOut++;
+    }
+  }
+  // if (this->playersOut > this->currentMaxPlayers)
+  // {
+  //   this->playersOut = 0;
+  // }
+
+  return this->playersOut;
 }
 
 void Flipper::updateWinnerId()
@@ -287,7 +302,7 @@ void Flipper::updateWinnerId()
   for (uint8_t i = 0; i < this->currentMaxPlayers; i++)
   {
     bool isSolo = (this->currentMaxPlayers == 1 && this->players[this->playerTurn].getScore() > 0);
-    if (this->players[i].getScore() > this->players[this->winnerId].getScore() || isSolo)
+    if (this->players[i].getScore() > this->players[this->winnerId < 0 ? 0 : this->winnerId].getScore() || isSolo)
     {
       this->winnerId = i;
     }

@@ -4,18 +4,20 @@ class Flipper
 {
 private:
   // config
-  unsigned short maxPlayers;
-  unsigned short maxTry;
-  unsigned short startDelay;
+  uint8_t maxPlayers;
+  uint8_t maxTry;
+  uint32_t startDelay;
 
-  unsigned short currentMaxPlayers = 0;
-  unsigned short playerTurn = 0;
+  uint8_t currentMaxPlayers = 0;
+  uint8_t playerTurn = 0;
   int8_t winnerId = -1;
 
-  long timer = 0;
+  uint32_t timer = 0;
   bool maxPlayersUpdated;
   bool scoreUpdated;
   bool ballDetected;
+  uint8_t playersOut;
+
   Player players[5] = {
     Player(0),
     Player(1),
@@ -25,12 +27,7 @@ private:
   };
 
 public:
-  /*
-   * @param maxPlayers Nombre de joueurs dans la partie
-   * @param maxTry Nombre de balle par joueur
-   * @param startDelay délai de démarrage de la partie
-   */
-  Flipper(unsigned short maxPlayers, unsigned short maxTry, unsigned short startDelay);
+  Flipper(uint8_t maxPlayers, uint8_t maxTry, uint32_t startDelay);
 
   void init();
   bool canStart();
@@ -46,10 +43,10 @@ public:
   Player* getPlayers();
   void nextPlayer();
   short getMaxTry();
-  unsigned short getMaxPlayer();
-  short getTimer();
+  uint8_t getMaxPlayer();
+  long getTimer();
   void resetBonus();
-  void setPlayerOut(uint8_t i);
+  uint8_t getPlayersOut();
   void updateWinnerId();
   int8_t getWinnerId();
   void ejection();
