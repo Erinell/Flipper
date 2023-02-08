@@ -49,5 +49,5 @@ public:
   uint8_t getPlayersOut();
   void updateWinnerId();
   int8_t getWinnerId();
-  void ejection();
+  void ejectBall();
 };

@@ -29,17 +29,51 @@ const unsigned char selector[] PROGMEM = {
     // 'selector', 6x4px
     0x84, 0xcc, 0x78, 0x30};
 
+void scrollString(String str)
+{
+
+  display.fillScreen(BLACK);
+  display.setTextWrap(false);
+  display.setTextSize(2);
+  int charWidth = 12;
+  int pxwidth = (str.length() * charWidth) + 32;
+  display.setFont();
+  display.setTextColor(BLUE, BLACK);
+  for (int32_t x = charWidth; x >= -pxwidth; x--)
+  {
+    display.setCursor(x * 2, 8);
+    display.print(str);
+  }
+}
+
 void initGame()
 {
   flipper.init();
 
-  display.setTextColor(RED);
+  display.setTextColor(RED, BLACK);
+  display.setFont();
+  display.setTextSize(2);
+  // scrollString("Aucune balle");
+  String txt = "Aucune balle";
+  int x = 0;
+  int pxwidth = (txt.length() * 12);
   while (!flipper.isBallDetected())
   {
-    display.setCursor(2, 13);
-    display.print("Aucune");
-    display.setCursor(12, 29);
-    display.print("Balle");
+    Serial.print(x);
+    Serial.print(" ");
+    Serial.println(pxwidth);
+    display.setCursor(x * 2, 6);
+    display.print(txt);
+
+    x--;
+    if (x < -pxwidth)
+    {
+      x = 0;
+    }
+    // display.setCursor(2, 13);
+    // display.print("Aucune");
+    // display.setCursor(12, 29);
+    // display.print("Balle");
   }
   display.fillScreen(BLACK);
   display.setFont();
@@ -166,7 +200,6 @@ void endgame()
   while (true) // boucle (temporaire) anti retour
   {
   }
-  
 }
 
 void loop()
@@ -192,6 +225,7 @@ void loop()
     }
     flipper.resetBonus();
     flipper.nextPlayer();
+    flipper.ejectBall();
     return;
   }
 

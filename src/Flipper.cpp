@@ -314,9 +314,9 @@ int8_t Flipper::getWinnerId()
   return this->winnerId > -1 ? this->winnerId : 0;
 }
 
-void Flipper::ejection()
+void Flipper::ejectBall()
 {
   digitalWrite(ballEjection, HIGH);
-  delay(50);
+  delay(50); // adapter le délai
   digitalWrite(ballEjection, LOW);
 }
