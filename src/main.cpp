@@ -1,11 +1,11 @@
 #include <Arduino.h>
 #include <SPI.h>
-#include <Pins.h>
-#include <Colors.h>
+#include "Pins.h"
+#include "Colors.h"
 #include <RGBmatrixPanel.h>
 #include <Fonts/FreeSans9pt7b.h>
-#include <Flipper.h>
-#include <Player.h>
+#include "Flipper.h"
+#include "Player.h"
 
 RGBmatrixPanel display(A, B, C, D, CLK, LAT, OE, false, 64);
 

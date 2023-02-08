@@ -1,6 +1,6 @@
 #include "Flipper.h"
 #include <Arduino.h>
-#include <Pins.h>
+#include "Pins.h"
 
 Flipper::Flipper(uint8_t maxPlayers, uint8_t maxTry, uint32_t startDelay)
 {
