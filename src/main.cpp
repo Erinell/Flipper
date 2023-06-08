@@ -11,7 +11,7 @@ RGBmatrixPanel display(A, B, C, D, CLK, LAT, OE, false, 64);
 
 Flipper flipper(MAX_PLAYERS, MAX_TRY, START_DELAY);
 
-// void (*resetFunc)(void) = 0; // fonction reset
+void (*resetFunc)(void) = 0; // reset soft
 
 const unsigned char tete[] PROGMEM = {
     // 'tete, 8x10px
@@ -195,8 +195,9 @@ void endgame()
   display.setCursor(22, 11);
   display.print("FIN!");
 
-  delay(10000); // un certains temps avant reset
-  digitalWrite(reset, LOW);
+  delay(END_DELAY); // un certains temps avant reset
+  SOFT_RESET ? resetFunc() : digitalWrite(reset, LOW);
+
   while (true) // boucle (temporaire) anti retour
   {
   }
