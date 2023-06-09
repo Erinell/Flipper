@@ -60,4 +60,5 @@ public:
   void updateWinnerId();
   int8_t getWinnerId();
   void ejectBall();
+  void EnableBatteurs(bool enable);
 };

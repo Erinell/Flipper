@@ -35,6 +35,7 @@ void Flipper::init()
   pinMode(tilt, INPUT);
   pinMode(ballEjection, OUTPUT);
   pinMode(reset, OUTPUT);
+  pinMode(batteurs, OUTPUT);
 }
 
 bool Flipper::canStart()
@@ -296,4 +297,8 @@ void Flipper::ejectBall()
   digitalWrite(ballEjection, HIGH);
   delay(50); // adapter le délai
   digitalWrite(ballEjection, LOW);
+}
+
+void Flipper::EnableBatteurs(bool enable){
+  digitalWrite(batteurs, enable ? HIGH : LOW);
 }

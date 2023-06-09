@@ -91,6 +91,7 @@ void initGame()
   }
 
   flipper.updatePlayer();
+  flipper.EnableBatteurs(true);
 
   display.fillScreen(BLACK);
   display.drawRect(0, 0, 64, 32, BLUE);
@@ -195,6 +196,8 @@ void endgame()
   display.setCursor(22, 11);
   display.print("FIN!");
 
+  flipper.EnableBatteurs(false);
+
   delay(END_DELAY); // un certains temps avant reset
   SOFT_RESET ? resetFunc() : digitalWrite(reset, LOW);
 
@@ -227,6 +230,8 @@ void loop()
     flipper.resetBonus();
     flipper.nextPlayer();
     flipper.ejectBall();
+
+    // TODO: remonter les targets
     return;
   }
 
