@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Pins.h"
 
 class Flipper
 {
@@ -7,6 +8,15 @@ private:
   uint8_t maxPlayers;
   uint8_t maxTry;
   uint32_t startDelay;
+
+  uint8_t points[NB_SCORE] = SCORE;
+  uint16_t points_value[NB_SCORE] = SCORE_VALUE;
+
+  uint8_t bonus[NB_BONUS] = BONUS;
+  uint16_t bonus_value[NB_BONUS] = BONUS_VALUE;
+  uint8_t leds_bonus[NB_BONUS] = LEDS_BONUS;
+  
+  uint8_t targets[NB_TARGET] = TARGETS;
 
   uint8_t currentMaxPlayers = 0;
   uint8_t playerTurn = 0;

@@ -11,15 +11,23 @@ Flipper::Flipper(uint8_t maxPlayers, uint8_t maxTry, uint32_t startDelay)
 
 void Flipper::init()
 {
-  pinMode(points10, INPUT);
-  pinMode(points100, INPUT);
-  pinMode(points1000, INPUT);
-  pinMode(points10000, INPUT);
+  for (uint8_t i = 0; i < sizeof(this->points); i++)
+  {
+    pinMode(this->points[i], INPUT);
+  }
+  for (uint8_t i = 0; i < sizeof(this->bonus); i++)
+  {
+    pinMode(this->bonus[i], INPUT);
+  }
+  for (uint8_t i = 0; i < sizeof(this->leds_bonus); i++)
+  {
+    pinMode(this->leds_bonus[i], OUTPUT);
+  }
 
-  pinMode(bonus150, INPUT);
-  pinMode(bonus250, INPUT);
-  pinMode(bonus750, INPUT);
-  pinMode(bonus1500, INPUT);
+  for (uint8_t i = 0; i < sizeof(this->targets); i++)
+  {
+    pinMode(this->targets[i], INPUT);
+  }
 
   pinMode(credits, INPUT);
   pinMode(start, INPUT);
@@ -27,12 +35,6 @@ void Flipper::init()
   pinMode(tilt, INPUT);
   pinMode(ballEjection, OUTPUT);
   pinMode(reset, OUTPUT);
-
-  // debug LED
-  pinMode(led150, OUTPUT);
-  pinMode(led250, OUTPUT);
-  pinMode(led750, OUTPUT);
-  pinMode(led1500, OUTPUT);
 }
 
 bool Flipper::canStart()
@@ -176,92 +178,67 @@ void Flipper::updateScore()
 {
   if (!this->scoreUpdated)
   {
-    if (digitalRead(points10) == HIGH)
+    for (uint8_t i = 0; i < sizeof(this->points); i++)
     {
-      this->players[this->playerTurn].increaseScore(10);
-      this->scoreUpdated = true;
-    }
-    if (digitalRead(points100) == HIGH)
-    {
-      this->players[this->playerTurn].increaseScore(100);
-      this->scoreUpdated = true;
-    }
-    if (digitalRead(points1000) == HIGH)
-    {
-      this->players[this->playerTurn].increaseScore(1000);
-      this->scoreUpdated = true;
-    }
-    if (digitalRead(points10000) == HIGH)
-    {
-      this->players[this->playerTurn].increaseScore(10000);
+      if (digitalRead(this->points[i]) == LOW)
+        continue;
+      this->players[this->playerTurn].increaseScore(this->points_value[i]);
       this->scoreUpdated = true;
     }
 
-    // Bonus
-    if (digitalRead(bonus150) == HIGH)
+    for (uint8_t i = 0; i < sizeof(this->bonus); i++)
     {
-      if (digitalRead(led150) == HIGH)
+      if (digitalRead(this->bonus[i]) == LOW)
+        continue;
+      if (digitalRead(this->leds_bonus[i]) == HIGH)
       {
-        this->players[this->playerTurn].increaseScore(300);
+        this->players[this->playerTurn].increaseScore(this->bonus_value[i] * 2);
       }
-      if (digitalRead(led150) == LOW)
+      if (digitalRead(this->leds_bonus[i]) == LOW)
       {
-        this->players[this->playerTurn].increaseScore(150);
-        digitalWrite(led150, HIGH);
+        this->players[this->playerTurn].increaseScore(this->bonus_value[i]);
+        digitalWrite(this->leds_bonus[i], HIGH);
       }
       this->scoreUpdated = true;
     }
-    if (digitalRead(bonus250) == HIGH)
+
+    for (uint8_t i = 0; i < sizeof(this->targets); i++)
     {
-      if (digitalRead(led250) == HIGH)
-      {
-        this->players[this->playerTurn].increaseScore(500);
-      }
-      if (digitalRead(led250) == LOW)
-      {
-        this->players[this->playerTurn].increaseScore(250);
-        digitalWrite(led250, HIGH);
-      }
-      this->scoreUpdated = true;
-    }
-    if (digitalRead(bonus750) == HIGH)
-    {
-      if (digitalRead(led750) == HIGH)
-      {
-        this->players[this->playerTurn].increaseScore(1500);
-      }
-      if (digitalRead(led750) == LOW)
-      {
-        this->players[this->playerTurn].increaseScore(750);
-        digitalWrite(led750, HIGH);
-      }
-      this->scoreUpdated = true;
-    }
-    if (digitalRead(bonus1500) == HIGH)
-    {
-      if (digitalRead(led1500) == HIGH)
-      {
-        this->players[this->playerTurn].increaseScore(3000);
-      }
-      if (digitalRead(led1500) == LOW)
-      {
-        this->players[this->playerTurn].increaseScore(1500);
-        digitalWrite(led1500, HIGH);
-      }
+      if (digitalRead(this->targets[i]) == LOW)
+        continue;
+      this->players[this->playerTurn].increaseScore(1000);
       this->scoreUpdated = true;
     }
   }
 
   if (this->scoreUpdated)
   {
-    if (digitalRead(points10) == LOW &&
-        digitalRead(points100) == LOW &&
-        digitalRead(points1000) == LOW &&
-        digitalRead(points10000) == LOW &&
-        digitalRead(bonus150) == LOW &&
-        digitalRead(bonus250) == LOW &&
-        digitalRead(bonus750) == LOW &&
-        digitalRead(bonus1500) == LOW)
+    bool allLow = true;
+    for (uint8_t i = 0; i < sizeof(this->points); i++)
+    {
+      if (digitalRead(this->points[i]) == LOW)
+        continue;
+      allLow = false;
+      break;
+    }
+
+    for (uint8_t i = 0; i < sizeof(this->bonus); i++)
+    {
+      if (digitalRead(this->bonus[i]) == LOW)
+        continue;
+      allLow = false;
+      break;
+    }
+
+    for (uint8_t i = 0; i < sizeof(this->targets); i++)
+    {
+      if (digitalRead(this->targets[i]) == LOW)
+        continue;
+      allLow = false;
+      break;
+    }
+
+    if (allLow)
     {
       this->scoreUpdated = false;
     }
@@ -271,10 +248,10 @@ void Flipper::updateScore()
 
 void Flipper::resetBonus()
 {
-  digitalWrite(led150, LOW);
-  digitalWrite(led250, LOW);
-  digitalWrite(led750, LOW);
-  digitalWrite(led1500, LOW);
+  for (uint8_t i = 0; i < sizeof(this->leds_bonus); i++)
+  {
+    digitalWrite(leds_bonus[i], LOW);
+  }
 }
 
 uint8_t Flipper::getPlayersOut()

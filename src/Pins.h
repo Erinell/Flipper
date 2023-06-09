@@ -1,25 +1,18 @@
 #include "Settings.h"
 // ------------ Boutons ------------
+#define SCORE {52, 53, 50, 51}
 
-#define points10        52
-#define points100       53
-#define points1000      50
-#define points10000     51
 #define credits         -1
 #define start           48
 #define tilt            34  // input 1 si flipper basculé
 #define ballDetection   49  // input 1 si bille dans rail prêt à tirer
 #define reset           8
 
-#define bonus150        42
-#define bonus250        40
-#define bonus750        38
-#define bonus1500       36
-#define led150          43
-#define led250          41
-#define led750          39
-#define led1500         37
+#define BONUS {42, 40, 38, 36}
+#define LEDS_BONUS {43, 41, 39, 37}
 
+#define TARGETS {46, 47, 44, 45} // pour test
+// #define TARGETS {22, 23, 24, 25, 26} // contacts 1000 points
 
 // ------------ Solenoides ------------
 
