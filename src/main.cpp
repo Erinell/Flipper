@@ -231,7 +231,7 @@ void loop()
     flipper.nextPlayer();
     flipper.ejectBall();
 
-    // TODO: remonter les targets
+    flipper.resetTargets();
     return;
   }
 

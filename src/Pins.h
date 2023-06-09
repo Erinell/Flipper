@@ -17,7 +17,8 @@
 
 // ------------ Solenoides ------------
 
-#define ballEjection    A0  // Output 1 pour tirer
+#define ballEjection    A0
+#define liftTargets     A1
 
 // ------------ Matrice LED HUB75 ------------
 #ifdef HUB75
