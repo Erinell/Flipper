@@ -7,7 +7,7 @@
 #define tilt            34  // input 1 si flipper basculé
 #define ballDetection   49  // input 1 si bille dans rail prêt à tirer
 #define reset           8   // Hardware reset
-#define batteurs        7   // contrôle relai pour 24V
+#define batteurs        7   // contrôle relai pour 24V des batteurs
 
 #define BONUS {42, 40, 38, 36}
 #define LEDS_BONUS {43, 41, 39, 37}
@@ -18,7 +18,7 @@
 // ------------ Solenoides ------------
 
 #define ballEjection    A0
-#define liftTargets     A1
+#define liftTargets     A1 // remontée des cibles
 
 // ------------ Matrice LED HUB75 ------------
 #ifdef HUB75
