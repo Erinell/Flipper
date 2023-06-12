@@ -1,5 +1,8 @@
 #include "Player.h"
 #include <Arduino.h>
+Player::Player()
+{
+}
 
 Player::Player(uint8_t id)
 {
@@ -47,3 +50,4 @@ bool Player::isOut()
 {
   return this->endGame;
 }
+

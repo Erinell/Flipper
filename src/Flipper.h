@@ -33,13 +33,7 @@ private:
   bool ballDetected;
   uint8_t playersOut;
 
-  Player players[5] = {
-    Player(0),
-    Player(1),
-    Player(2),
-    Player(3),
-    Player(4),
-  };
+  Player players[MAX_PLAYERS];
 
 public:
   Flipper(uint8_t maxPlayers, uint8_t maxTry, uint32_t startDelay);

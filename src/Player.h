@@ -15,6 +15,7 @@ private:
 public:
   // @param id index du joueur
   Player(uint8_t id);
+  Player();
 
   uint8_t getId();
   void addDetectedBall();
