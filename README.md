@@ -1,5 +1,12 @@
 # Flipper
 
+## Sommaire
+1. [Pins](#Pins)
+2. [Schémas](#Schémas)
+    - [Arduino Méga](#Arduino-Mega)
+    - [Matrice LED](#Matrice-LED)
+3. [Notes](#Notes)
+
 ## Pins
 
 Nom              | Mode | Pin
@@ -53,6 +60,16 @@ OE  | D9  | GND | GND
 <!-- matrice pins standard : [https://www.hackster.io/Maddy/using-the-dfrobot-rgb-led-matrix-921141] -->
 - Arduino mega 2560
 
+## Schémas
+### Arduino Mega
+![Mega2560](https://github.com/Erinell/Flipper/blob/master/docs/img/Schematic_ArduinoMega_2023-06-12.png?raw=true)
+
+### Matrice LED
+![Matrice LED](https://github.com/Erinell/Flipper/blob/master/docs/img/Schematic_Matrix_2023-06-08.png?raw=true)
+
+### Switch
+![Switch](https://github.com/Erinell/Flipper/blob/master/docs/img/Schematic_Switchs_2023-06-08.png?raw=true)
+
 ## Notes
 
 #### Sélection joueurs
@@ -74,14 +91,3 @@ Des boutons incrémentent le score du joueur en cours (10, 100, 1000, 10000).\
 #### Fin de partie
 Si la balle est détectée sur ballDetection, on passe au joueur suivant.\
 Fin de partie quand 3 balles ont été détéctées sur tout les joueurs.
-
-## Docs
-### Arduino Mega
-![Mega2560](https://github.com/Erinell/Flipper/blob/master/docs/img/Schematic_ArduinoMega_2023-06-12.png?raw=true)
-
-### Matrice LED
-![Matrice LED](https://github.com/Erinell/Flipper/blob/master/docs/img/Schematic_Matrix_2023-06-08.png?raw=true)
-
-### Switch
-![Switch](https://github.com/Erinell/Flipper/blob/master/docs/img/Schematic_Switchs_2023-06-08.png?raw=true)
-
