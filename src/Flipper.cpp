@@ -328,10 +328,6 @@ void Flipper::triggerSolenoids()
   {
     if (digitalRead(this->trigger_solenoid_pin[i]) == LOW)
       continue;
-
-    Serial.print(this->solenoids_pin[i]);
-    Serial.print(" ");
-    Serial.println(this->trigger_solenoid_pin[i]);
     digitalWrite(this->solenoids_pin[i], HIGH);
     delay(50);
     digitalWrite(this->solenoids_pin[i], LOW);
