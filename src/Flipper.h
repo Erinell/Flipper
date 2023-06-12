@@ -1,22 +1,27 @@
 #include "Player.h"
 #include "Pins.h"
+#include "macro.h"
+#include "Sanity.h"
 
 class Flipper
 {
 private:
-  // config
   uint8_t maxPlayers;
   uint8_t maxTry;
   uint32_t startDelay;
 
-  uint8_t points[NB_SCORE] = SCORE;
-  uint16_t points_value[NB_SCORE] = SCORE_VALUE;
+  uint8_t points[COUNT(_points_pin)] = SCORE;
+  uint16_t points_value[COUNT(_points_value)] = SCORE_VALUE;
 
-  uint8_t bonus[NB_BONUS] = BONUS;
-  uint16_t bonus_value[NB_BONUS] = BONUS_VALUE;
-  uint8_t leds_bonus[NB_BONUS] = LEDS_BONUS;
+  uint8_t bonus_pin[COUNT(_bonus_pin)] = BONUS;
+  uint16_t bonus_value[COUNT(_bonus_value)] = BONUS_VALUE;
+  uint8_t leds_bonus[COUNT(_bonus_led)] = LEDS_BONUS;
   
-  uint8_t targets[NB_TARGET] = TARGETS;
+  uint8_t targets_pin[COUNT(_target_pin)] = TARGETS;
+  uint16_t targets_value[COUNT(_targets_value)] = TARGET_VALUE;
+
+  uint8_t solenoids_pin[COUNT(_solenoids_pin)] = SOLENOIDS;
+  uint8_t trigger_solenoid_pin[COUNT(_trigger_solenoids_pin)] = TRIGGER_SOLENOID;
 
   uint8_t currentMaxPlayers = 0;
   uint8_t playerTurn = 0;
@@ -62,4 +67,5 @@ public:
   void ejectBall();
   void resetTargets();
   void EnableBatteurs(bool enable);
+  void triggerSolenoids();
 };
