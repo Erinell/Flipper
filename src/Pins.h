@@ -12,13 +12,15 @@
 #define BONUS {42, 40, 38, 36}
 #define LEDS_BONUS {43, 41, 39, 37}
 
-#define TARGETS {46, 47, 44, 45} // pour test
-// #define TARGETS {22, 23, 24, 25, 26} // contacts 1000 points
+#define TARGETS {30, 31, 32, 33, 34} // contacts 1000 points
+
+#define TRIGGER_SOLENOID {44, 45} // contacts pour SOLENOIDS
 
 // ------------ Solenoides ------------
 
 #define ballEjection    A0
 #define liftTargets     A1 // remontée des cibles
+#define SOLENOIDS {A2, A5}
 
 // ------------ Matrice LED HUB75 ------------
 #ifdef HUB75

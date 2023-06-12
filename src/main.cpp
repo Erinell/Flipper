@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <SPI.h>
-#include "Pins.h"
 #include "Colors.h"
 #include <RGBmatrixPanel.h>
 #include <Fonts/FreeSans9pt7b.h>
@@ -59,9 +58,6 @@ void initGame()
   int pxwidth = (txt.length() * 12);
   while (!flipper.isBallDetected())
   {
-    Serial.print(x);
-    Serial.print(" ");
-    Serial.println(pxwidth);
     display.setCursor(x * 2, 6);
     display.print(txt);
 
@@ -211,6 +207,7 @@ void loop()
   Player currentPlayer = flipper.currentPlayer();
 
   flipper.updateScore();
+  flipper.triggerSolenoids();
 
   if (flipper.isTilted())
   {

@@ -15,18 +15,28 @@ void Flipper::init()
   {
     pinMode(this->points[i], INPUT);
   }
-  for (uint8_t i = 0; i < sizeof(this->bonus); i++)
+  for (uint8_t i = 0; i < sizeof(this->bonus_pin); i++)
   {
-    pinMode(this->bonus[i], INPUT);
+    pinMode(this->bonus_pin[i], INPUT);
   }
   for (uint8_t i = 0; i < sizeof(this->leds_bonus); i++)
   {
     pinMode(this->leds_bonus[i], OUTPUT);
   }
 
-  for (uint8_t i = 0; i < sizeof(this->targets); i++)
+  for (uint8_t i = 0; i < sizeof(this->targets_pin); i++)
   {
-    pinMode(this->targets[i], INPUT);
+    pinMode(this->targets_pin[i], INPUT);
+  }
+
+  for (uint8_t i = 0; i < sizeof(this->solenoids_pin); i++)
+  {
+    pinMode(this->solenoids_pin[i], OUTPUT);
+  }
+
+  for (uint8_t i = 0; i < sizeof(this->trigger_solenoid_pin); i++)
+  {
+    pinMode(this->trigger_solenoid_pin[i], INPUT);
   }
 
   pinMode(credits, INPUT);
@@ -188,9 +198,9 @@ void Flipper::updateScore()
       this->scoreUpdated = true;
     }
 
-    for (uint8_t i = 0; i < sizeof(this->bonus); i++)
+    for (uint8_t i = 0; i < sizeof(this->bonus_pin); i++)
     {
-      if (digitalRead(this->bonus[i]) == LOW)
+      if (digitalRead(this->bonus_pin[i]) == LOW)
         continue;
       if (digitalRead(this->leds_bonus[i]) == HIGH)
       {
@@ -204,11 +214,11 @@ void Flipper::updateScore()
       this->scoreUpdated = true;
     }
 
-    for (uint8_t i = 0; i < sizeof(this->targets); i++)
+    for (uint8_t i = 0; i < sizeof(this->targets_pin); i++)
     {
-      if (digitalRead(this->targets[i]) == LOW)
+      if (digitalRead(this->targets_pin[i]) == LOW)
         continue;
-      this->players[this->playerTurn].increaseScore(1000);
+      this->players[this->playerTurn].increaseScore(this->targets_value[i]);
       this->scoreUpdated = true;
     }
   }
@@ -224,17 +234,17 @@ void Flipper::updateScore()
       break;
     }
 
-    for (uint8_t i = 0; i < sizeof(this->bonus); i++)
+    for (uint8_t i = 0; i < sizeof(this->bonus_pin); i++)
     {
-      if (digitalRead(this->bonus[i]) == LOW)
+      if (digitalRead(this->bonus_pin[i]) == LOW)
         continue;
       allLow = false;
       break;
     }
 
-    for (uint8_t i = 0; i < sizeof(this->targets); i++)
+    for (uint8_t i = 0; i < sizeof(this->targets_pin); i++)
     {
-      if (digitalRead(this->targets[i]) == LOW)
+      if (digitalRead(this->targets_pin[i]) == LOW)
         continue;
       allLow = false;
       break;
@@ -300,12 +310,30 @@ void Flipper::ejectBall()
   digitalWrite(ballEjection, LOW);
 }
 
-void Flipper::resetTargets() {
+void Flipper::resetTargets()
+{
   digitalWrite(liftTargets, HIGH);
   delay(50); // adapter le délai
   digitalWrite(liftTargets, LOW);
 }
 
-void Flipper::EnableBatteurs(bool enable){
+void Flipper::EnableBatteurs(bool enable)
+{
   digitalWrite(batteurs, enable ? HIGH : LOW);
+}
+
+void Flipper::triggerSolenoids()
+{
+  for (uint8_t i = 0; i < sizeof(this->trigger_solenoid_pin); i++)
+  {
+    if (digitalRead(this->trigger_solenoid_pin[i]) == LOW)
+      continue;
+
+    Serial.print(this->solenoids_pin[i]);
+    Serial.print(" ");
+    Serial.println(this->trigger_solenoid_pin[i]);
+    digitalWrite(this->solenoids_pin[i], HIGH);
+    delay(50);
+    digitalWrite(this->solenoids_pin[i], LOW);
+  }
 }
