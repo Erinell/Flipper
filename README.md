@@ -68,7 +68,7 @@ Fin de partie quand 3 balles ont été détéctées sur tout les joueurs.
 
 ## Docs
 ### Arduino Mega
-![Switch](https://github.com/Erinell/Flipper/blob/master/docs/img/Schematic_ArduinoMega_2023-06-12.png?raw=true)
+![Mega2560](https://github.com/Erinell/Flipper/blob/master/docs/img/Schematic_ArduinoMega_2023-06-12.png?raw=true)
 
 ### Matrice LED
 ![Matrice LED](https://github.com/Erinell/Flipper/blob/master/docs/img/Schematic_Matrix_2023-06-08.png?raw=true)
