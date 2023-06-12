@@ -2,31 +2,40 @@
 
 ## Pins
 
-Nom           | Mode | Pin
---------------|------|----
-reset         | OUT  | D8
-bonus1500     | IN   | D36
-led1500       | OUT  | D37
-bonus750      | IN   | D38
-led750        | OUT  | D39
-bonus250      | IN   | D40
-led250        | OUT  | D41
-bonus150      | IN   | D42
-led150        | OUT  | D43
-start         | IN   | D48
-ballDetection | IN   | D49
-points1000    | IN   | D50
-points10000   | IN   | D51
-points10      | IN   | D52
-points100     | IN   | D53
-credits       | IN   | -1
-
-ballEjection  | OUT  | A0
+Nom              | Mode | Pin
+-----------------|------|----
+reset            | OUT  | D8
+target_1         | IN   | D30
+target_2         | IN   | D31
+target_3         | IN   | D32
+target_4         | IN   | D33
+target_5         | IN   | D34
+bonus1500        | IN   | D36
+led1500          | OUT  | D37
+bonus750         | IN   | D38
+led750           | OUT  | D39
+bonus250         | IN   | D40
+led250           | OUT  | D41
+bonus150         | IN   | D42
+led150           | OUT  | D43
+trigg_solenoid_1 | IN   | D44
+trigg_solenoid_2 | IN   | D45
+start            | IN   | D48
+ballDetection    | IN   | D49
+points1000       | IN   | D50
+points10000      | IN   | D51
+points10         | IN   | D52
+points100        | IN   | D53
+ballEjection     | OUT  | A0
+liftTarget       | OUT  | A1
+solenoid_1       | OUT  | A2
+solenoid_2       | OUT  | A3
+credits          | IN   | -1
 
 ### Matrice LED
 HUB75 brochage
 
- 1  | Pin | Pin | 2
+1   | Pin | Pin | 2
 ----|-----|-----|----
 R1  | D24 | D25 | G1
 B1  | D26 | GND | GND
