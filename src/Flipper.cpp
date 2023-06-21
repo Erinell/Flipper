@@ -285,14 +285,14 @@ int8_t Flipper::getWinnerId()
 void Flipper::ejectBall()
 {
   digitalWrite(ballEjection, HIGH);
-  delay(50); // adapter le délai
+  delay(TIMER_SOLENOIDS);
   digitalWrite(ballEjection, LOW);
 }
 
 void Flipper::resetTargets()
 {
   digitalWrite(liftTargets, HIGH);
-  delay(50); // adapter le délai
+  delay(TIMER_SOLENOIDS);
   digitalWrite(liftTargets, LOW);
 }
 
@@ -308,7 +308,7 @@ void Flipper::triggerSolenoids()
     if (digitalRead(this->trigger_solenoid_pin[i]) == LOW)
       continue;
     digitalWrite(this->solenoids_pin[i], HIGH);
-    delay(50);
+    delay(TIMER_SOLENOIDS);
     digitalWrite(this->solenoids_pin[i], LOW);
   }
 }

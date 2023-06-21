@@ -29,3 +29,6 @@
  Les valeurs sont multipliées par 2 si le bonus est actif
 */
 #define BONUS_VALUE {150, 250, 750, 1500}
+
+// Délai d'activation des solénoïdes en ms.
+#define TIMER_SOLENOIDS 100
