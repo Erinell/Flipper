@@ -12,7 +12,7 @@
 #define BONUS {42, 40, 38, 36}
 #define LEDS_BONUS {43, 41, 39, 37}
 
-#define TARGETS {30, 31, 32, 33, 34} // contacts 1000 points
+#define TARGETS 46 // contact pour score des cibles
 
 #define TRIGGER_SOLENOID {44, 45} // contacts pour SOLENOIDS
 

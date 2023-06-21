@@ -31,7 +31,7 @@
 #define BONUS_VALUE {150, 250, 750, 1500}
 
 /*
- Valeurs des cibles associées aux broches TARGETS (voir Pins.h)
+ Valeur des cibles associées à la broche TARGETS (voir Pins.h)
  Les cibles remontent lors d'une nouvelle bille
 */
-#define TARGET_VALUE {1000, 1000, 1000, 1000, 1000}
+#define TARGET_VALUE 1000

@@ -16,9 +16,6 @@ private:
   uint8_t bonus_pin[COUNT(_bonus_pin)] = BONUS;
   uint16_t bonus_value[COUNT(_bonus_value)] = BONUS_VALUE;
   uint8_t leds_bonus[COUNT(_bonus_led)] = LEDS_BONUS;
-  
-  uint8_t targets_pin[COUNT(_target_pin)] = TARGETS;
-  uint16_t targets_value[COUNT(_targets_value)] = TARGET_VALUE;
 
   uint8_t solenoids_pin[COUNT(_solenoids_pin)] = SOLENOIDS;
   uint8_t trigger_solenoid_pin[COUNT(_trigger_solenoids_pin)] = TRIGGER_SOLENOID;
