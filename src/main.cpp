@@ -107,17 +107,23 @@ void setup()
   initGame();
 }
 
-void showScore(int x, int y, String score, uint16_t color)
+void showScore(int x, int y, unsigned long score, uint16_t color)
 {
+  char _score[9];
+  // sprintf(score, "%09lu", this->score);
+  sprintf(_score, "%9lu", score);
+  String str_score = _score;
   display.setTextColor(color, BLACK);
   display.setCursor(x, y);
-  display.print(score.substring(0, 3));
-  display.drawPixel(x + 18, y + 6, color);
+  display.print(str_score.substring(0, 3));
+  if (score > 999999)
+    display.drawPixel(x + 18, y + 6, color);
   display.setCursor(x + 20, y);
-  display.print(score.substring(3, 6));
-  display.drawPixel(x + 38, y + 6, color);
+  display.print(str_score.substring(3, 6));
+  if (score > 999)
+    display.drawPixel(x + 38, y + 6, color);
   display.setCursor(x + 40, y);
-  display.print(score.substring(6, 9));
+  display.print(str_score.substring(6, 9));
 }
 
 void showPlayers(int x, int y, bool end = false)
@@ -186,7 +192,7 @@ void endgame()
   flipper.nextPlayer();
 
   showPlayers(15, 20, true);
-  showScore(4, 2, flipper.getPlayer(flipper.getWinnerId()).getScoreString(), YELLOW);
+  showScore(4, 2, flipper.getPlayer(flipper.getWinnerId()).getScore(), YELLOW);
 
   display.setTextColor(BLUE, BLACK);
   display.setCursor(22, 11);
@@ -214,7 +220,7 @@ void loop()
     tilted();
   }
 
-  showScore(4, 2, currentPlayer.getScoreString(), YELLOW);
+  showScore(4, 2, currentPlayer.getScore(), YELLOW);
   showPlayers(15, 20);
 
   // bille perdue
