@@ -1,5 +1,5 @@
 #include "Settings.h"
-// ------------ Boutons ------------
+// ------------ contacts ------------
 #define SCORE {52, 53, 50, 51, 30}
 
 #define credits         -1
