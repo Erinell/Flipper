@@ -29,9 +29,3 @@
  Les valeurs sont multipliées par 2 si le bonus est actif
 */
 #define BONUS_VALUE {150, 250, 750, 1500}
-
-/*
- Valeur des cibles associées à la broche TARGETS (voir Pins.h)
- Les cibles remontent lors d'une nouvelle bille
-*/
-#define TARGET_VALUE 1000
