@@ -22,7 +22,7 @@
 #define SOFT_RESET false
 
 // Valeurs de score associées aux broches SCORE (voir Pins.h)
-#define SCORE_VALUE {10, 100, 1000, 10000}
+#define SCORE_VALUE {10, 100, 1000, 10000, 1000}
 
 /*
  Valeurs des bonus associées aux broches BONUS (voir Pins.h)

@@ -34,7 +34,6 @@ void Flipper::init()
     pinMode(this->trigger_solenoid_pin[i], INPUT);
   }
 
-  pinMode(TARGETS, INPUT);
   pinMode(credits, INPUT);
   pinMode(start, INPUT);
   pinMode(ballDetection, INPUT);
@@ -209,12 +208,6 @@ void Flipper::updateScore()
       }
       this->scoreUpdated = true;
     }
-
-    if (digitalRead(TARGETS) == HIGH)
-    {
-      this->players[this->playerTurn].increaseScore(TARGET_VALUE);
-      this->scoreUpdated = true;
-    }
   }
 
   if (this->scoreUpdated)
@@ -234,11 +227,6 @@ void Flipper::updateScore()
         continue;
       allLow = false;
       break;
-    }
-
-    if (digitalRead(TARGETS) == HIGH)
-    {
-      allLow = false;
     }
 
     if (allLow)

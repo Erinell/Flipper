@@ -1,6 +1,6 @@
 #include "Settings.h"
 // ------------ Boutons ------------
-#define SCORE {52, 53, 50, 51}
+#define SCORE {52, 53, 50, 51, 30}
 
 #define credits         -1
 #define start           48
@@ -11,8 +11,6 @@
 
 #define BONUS {42, 40, 38, 36}
 #define LEDS_BONUS {43, 41, 39, 37}
-
-#define TARGETS 46 // contact pour score des cibles
 
 #define TRIGGER_SOLENOID {44, 45} // contacts pour SOLENOIDS
 
