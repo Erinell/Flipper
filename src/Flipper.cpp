@@ -159,6 +159,7 @@ void Flipper::nextPlayer()
   if (this->playerTurn < this->currentMaxPlayers - 1)
   {
     this->playerTurn++;
+    this->scoreUpdated = false;
   }
   else
   {
@@ -181,16 +182,16 @@ long Flipper::getTimer()
   return this->startDelay - (millis() - this->timer);
 }
 
-void Flipper::updateScore()
+bool Flipper::updateScore()
 {
-  if (!this->scoreUpdated)
+  if (!this->scoreTriggered)
   {
     for (uint8_t i = 0; i < sizeof(this->points); i++)
     {
       if (digitalRead(this->points[i]) == LOW)
         continue;
       this->players[this->playerTurn].increaseScore(this->points_value[i]);
-      this->scoreUpdated = true;
+      this->scoreTriggered = true;
     }
 
     for (uint8_t i = 0; i < sizeof(this->bonus_pin); i++)
@@ -206,12 +207,13 @@ void Flipper::updateScore()
         this->players[this->playerTurn].increaseScore(this->bonus_value[i]);
         digitalWrite(this->leds_bonus[i], HIGH);
       }
-      this->scoreUpdated = true;
+      this->scoreTriggered = true;
     }
   }
 
-  if (this->scoreUpdated)
+  if (this->scoreTriggered)
   {
+    this->scoreUpdated = true;
     bool allLow = true;
     for (uint8_t i = 0; i < sizeof(this->points); i++)
     {
@@ -231,10 +233,12 @@ void Flipper::updateScore()
 
     if (allLow)
     {
-      this->scoreUpdated = false;
+      this->scoreTriggered = false;
     }
   }
   delay(5);
+
+  return this->scoreUpdated;
 }
 
 void Flipper::resetBonus()
@@ -301,14 +305,44 @@ void Flipper::EnableBatteurs(bool enable)
   digitalWrite(batteurs, enable ? HIGH : LOW);
 }
 
+// bool triggered = false;
 void Flipper::triggerSolenoids()
 {
-  for (uint8_t i = 0; i < sizeof(this->trigger_solenoid_pin); i++)
-  {
-    if (digitalRead(this->trigger_solenoid_pin[i]) == LOW)
-      continue;
-    digitalWrite(this->solenoids_pin[i], HIGH);
-    delay(TIMER_SOLENOIDS);
-    digitalWrite(this->solenoids_pin[i], LOW);
-  }
+    for (uint8_t i = 0; i < sizeof(this->trigger_solenoid_pin); i++)
+    {
+      if (digitalRead(this->trigger_solenoid_pin[i]) == LOW)
+        continue;
+      digitalWrite(this->solenoids_pin[i], HIGH);
+      delay(TIMER_SOLENOIDS);
+      digitalWrite(this->solenoids_pin[i], LOW);
+    }
+  // if (!triggered)
+  // {
+  //   for (uint8_t i = 0; i < sizeof(this->trigger_solenoid_pin); i++)
+  //   {
+  //     if (digitalRead(this->trigger_solenoid_pin[i]) == LOW)
+  //       continue;
+  //     digitalWrite(this->solenoids_pin[i], HIGH);
+  //     delay(TIMER_SOLENOIDS);
+  //     digitalWrite(this->solenoids_pin[i], LOW);
+  //     triggered = true;
+  //   }
+  // }
+
+  // if (triggered)
+  // {
+  //   bool allLow = true;
+  //   for (uint8_t i = 0; i < sizeof(this->trigger_solenoid_pin); i++)
+  //   {
+  //     if (digitalRead(this->trigger_solenoid_pin[i]) == LOW)
+  //       continue;
+  //     allLow = false;
+  //     break;
+  //   }
+
+  //   if (allLow)
+  //   {
+  //     triggered = false;
+  //   }
+  // }
 }

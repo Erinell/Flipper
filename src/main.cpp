@@ -110,7 +110,6 @@ void setup()
 void showScore(int x, int y, unsigned long score, uint16_t color)
 {
   char _score[9];
-  // sprintf(score, "%09lu", this->score);
   sprintf(_score, "%9lu", score);
   String str_score = _score;
   display.setTextColor(color, BLACK);
@@ -212,7 +211,7 @@ void loop()
 {
   Player currentPlayer = flipper.currentPlayer();
 
-  flipper.updateScore();
+  bool updatedScore = flipper.updateScore();
   flipper.triggerSolenoids();
 
   if (flipper.isTilted())
@@ -224,7 +223,7 @@ void loop()
   showPlayers(15, 20);
 
   // bille perdue
-  if (currentPlayer.detectedBalls() < flipper.getMaxTry())
+  if (currentPlayer.detectedBalls() < flipper.getMaxTry() && updatedScore)
   {
     if (!flipper.isBallDetected())
     {

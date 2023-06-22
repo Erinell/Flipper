@@ -26,6 +26,7 @@ private:
 
   uint32_t timer = 0;
   bool maxPlayersUpdated;
+  bool scoreTriggered;
   bool scoreUpdated;
   bool ballDetected;
   uint8_t playersOut;
@@ -39,7 +40,7 @@ public:
   bool canStart();
 
   void updatePlayer();
-  void updateScore();
+  bool updateScore();
 
   bool isBallDetected();
   bool isTilted();
