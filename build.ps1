@@ -1,4 +1,4 @@
-$version = "1.2"
+$version = "1.3"
 $sourceDir = "src"
 $destinationDir = ".release\Flipper-$version"
 $zipFile = ".release\Flipper-$version.zip"
