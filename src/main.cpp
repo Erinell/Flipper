@@ -115,6 +115,10 @@ void showScore(int x, int y, unsigned long score, uint16_t color)
   display.setTextColor(color, BLACK);
   display.setCursor(x, y);
   display.print(str_score.substring(0, 3));
+  if (score < 999)
+    display.drawPixel(x + 38, y + 6, BLACK);
+  if (score < 999999)
+    display.drawPixel(x + 18, y + 6, BLACK);
   if (score > 999999)
     display.drawPixel(x + 18, y + 6, color);
   display.setCursor(x + 20, y);
