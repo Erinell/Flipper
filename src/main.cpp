@@ -53,7 +53,7 @@ void initGame()
   display.setFont();
   display.setTextSize(2);
   // scrollString("Aucune balle");
-  String txt = "Aucune balle";
+  String txt = "Aucune bille";
   int x = 0;
   int pxwidth = (txt.length() * 12);
   while (!flipper.isBallDetected())
@@ -231,10 +231,15 @@ void loop()
     }
     flipper.resetBonus();
     flipper.nextPlayer();
-    flipper.ejectBall();
+    // flipper.ejectBall();
 
     flipper.resetTargets();
     return;
+  }
+
+  if (flipper.isBallDetected())
+  {
+    flipper.ejectBall();
   }
 
   if (flipper.getPlayersOut() >= flipper.getMaxPlayer())
