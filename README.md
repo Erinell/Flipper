@@ -93,6 +93,6 @@ Des boutons incrémentent le score du joueur en cours (10, 100, 1000, 10000).\
 Si la balle est détectée sur ballDetection, on passe au joueur suivant.\
 Fin de partie quand 3 balles ont été détéctées sur tout les joueurs.
 
-### Todo
+## Todo
 - [ ] Ajouter de l'audio
 - [ ] Ajouter des chenillards (bonus et/ou score)
