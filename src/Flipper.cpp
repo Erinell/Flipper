@@ -69,22 +69,24 @@ bool Flipper::canStart()
       this->timer = millis();
       return false;
     }
-
-    if (millis() - this->timer >= this->startDelay)
-    {
-      this->timer = 0;
-      return true;
-    }
   }
 
   if (this->maxPlayersUpdated)
   {
+    if (this->startPressed() && this->timer <= 0)
+    {
+      return true;
+    }
     if (!this->startPressed())
     {
       this->maxPlayersUpdated = false;
     }
   }
-
+  if (millis() - this->timer >= this->startDelay)
+  {
+    this->timer = 0;
+    return true;
+  }
   return false;
 }
 
@@ -100,28 +102,22 @@ bool Flipper::isBallDetected()
 {
   if (!this->ballDetected)
   {
-
     if (digitalRead(ballDetection) == HIGH)
     {
       this->ballDetected = true;
-      this->players[this->playerTurn].addDetectedBall();
       return true;
     }
   }
 
   if (this->ballDetected)
   {
-    // if (digitalRead(ballDetection) == HIGH)
-    // {
-    //   return true;
-    // }
     if (digitalRead(ballDetection) == LOW)
     {
       this->ballDetected = false;
     }
   }
 
-  return false;
+  return digitalRead(ballDetection);
 }
 
 bool Flipper::isTilted()
@@ -156,10 +152,11 @@ Player Flipper::currentPlayer()
 
 void Flipper::nextPlayer()
 {
+  this->scoreUpdated = false;
+  this->players[this->playerTurn].addDetectedBall();
   if (this->playerTurn < this->currentMaxPlayers - 1)
   {
     this->playerTurn++;
-    this->scoreUpdated = false;
   }
   else
   {
@@ -201,13 +198,14 @@ bool Flipper::updateScore()
       if (digitalRead(this->leds_bonus[i]) == HIGH)
       {
         this->players[this->playerTurn].increaseScore(this->bonus_value[i] * 2);
+        this->scoreTriggered = true;
       }
       if (digitalRead(this->leds_bonus[i]) == LOW)
       {
         this->players[this->playerTurn].increaseScore(this->bonus_value[i]);
+        this->scoreTriggered = true;
         digitalWrite(this->leds_bonus[i], HIGH);
       }
-      this->scoreTriggered = true;
     }
   }
 
@@ -237,7 +235,6 @@ bool Flipper::updateScore()
     }
   }
   delay(5);
-
   return this->scoreUpdated;
 }
 
@@ -291,6 +288,7 @@ void Flipper::ejectBall()
   digitalWrite(ballEjection, HIGH);
   delay(TIMER_SOLENOIDS);
   digitalWrite(ballEjection, LOW);
+  delay(1000); // eviter spam (a changer)
 }
 
 void Flipper::resetTargets()
@@ -308,14 +306,14 @@ void Flipper::EnableBatteurs(bool enable)
 // bool triggered = false;
 void Flipper::triggerSolenoids()
 {
-    for (uint8_t i = 0; i < sizeof(this->trigger_solenoid_pin); i++)
-    {
-      if (digitalRead(this->trigger_solenoid_pin[i]) == LOW)
-        continue;
-      digitalWrite(this->solenoids_pin[i], HIGH);
-      delay(TIMER_SOLENOIDS);
-      digitalWrite(this->solenoids_pin[i], LOW);
-    }
+  for (uint8_t i = 0; i < sizeof(this->trigger_solenoid_pin); i++)
+  {
+    if (digitalRead(this->trigger_solenoid_pin[i]) == LOW)
+      continue;
+    digitalWrite(this->solenoids_pin[i], HIGH);
+    delay(TIMER_SOLENOIDS);
+    digitalWrite(this->solenoids_pin[i], LOW);
+  }
   // if (!triggered)
   // {
   //   for (uint8_t i = 0; i < sizeof(this->trigger_solenoid_pin); i++)
