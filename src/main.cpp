@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <SPI.h>
+#include "Display.h"
 #include "Colors.h"
 #include <RGBmatrixPanel.h>
 #include <Fonts/FreeSans9pt7b.h>
@@ -11,22 +12,6 @@ RGBmatrixPanel display(A, B, C, D, CLK, LAT, OE, false, 64);
 Flipper flipper(MAX_PLAYERS, MAX_TRY, START_DELAY);
 
 void (*resetFunc)(void) = 0; // reset soft
-
-const unsigned char tete[] PROGMEM = {
-    // 'tete, 8x10px
-    0x3c, 0x42, 0x81, 0xa5, 0x81, 0x81, 0xa5, 0x99, 0x42, 0x3c};
-
-const unsigned char teteSoso[] PROGMEM = {
-    // 'tete_soso, 8x10px
-    0x3c, 0x42, 0x81, 0xa5, 0x81, 0x81, 0xbd, 0x81, 0x42, 0x3c};
-
-const unsigned char teteSad[] PROGMEM = {
-    // 'tete_sad, 8x10px
-    0x3c, 0x42, 0x81, 0xa5, 0x81, 0x99, 0xa5, 0x81, 0x42, 0x3c};
-
-const unsigned char selector[] PROGMEM = {
-    // 'selector', 6x4px
-    0x84, 0xcc, 0x78, 0x30};
 
 void scrollString(String str)
 {
@@ -71,24 +56,20 @@ void initGame()
     // display.setCursor(12, 29);
     // display.print("Balle");
   }
+
   display.fillScreen(BLACK);
-  display.setFont();
+  showVersion(display, 0, 1, ORANGE);
   display.setTextColor(GREEN, BLACK);
 
   while (!flipper.canStart())
   {
-    display.setTextSize(2);
-    display.setCursor(27, 1);
-    display.print(String(round(flipper.getTimer() / 900)));
-    display.setTextSize(1);
-    display.setCursor(5, 20);
-    display.print("Joueurs:");
-    display.print(String(flipper.getMaxPlayer()));
+    showPlayersSelection(display, GREEN, String(round(flipper.getTimer() / 900)), String(flipper.getMaxPlayer()));
   }
 
   flipper.updatePlayer();
   flipper.EnableBatteurs(true);
-
+  
+  display.setTextSize(1);
   display.fillScreen(BLACK);
   display.drawRect(0, 0, 64, 32, BLUE);
 }
@@ -105,28 +86,6 @@ void setup()
   display.setTextSize(1);
 
   initGame();
-}
-
-void showScore(int x, int y, unsigned long score, uint16_t color)
-{
-  char _score[9];
-  sprintf(_score, "%9lu", score);
-  String str_score = _score;
-  display.setTextColor(color, BLACK);
-  display.setCursor(x, y);
-  display.print(str_score.substring(0, 3));
-  if (score < 999)
-    display.drawPixel(x + 38, y + 6, BLACK);
-  if (score < 999999)
-    display.drawPixel(x + 18, y + 6, BLACK);
-  if (score > 999999)
-    display.drawPixel(x + 18, y + 6, color);
-  display.setCursor(x + 20, y);
-  display.print(str_score.substring(3, 6));
-  if (score > 999)
-    display.drawPixel(x + 38, y + 6, color);
-  display.setCursor(x + 40, y);
-  display.print(str_score.substring(6, 9));
 }
 
 void showPlayers(int x, int y, bool end = false)
@@ -195,7 +154,7 @@ void endgame()
   flipper.nextPlayer();
 
   showPlayers(15, 20, true);
-  showScore(4, 2, flipper.getPlayer(flipper.getWinnerId()).getScore(), YELLOW);
+  showScore(display, 2, 2, flipper.getPlayer(flipper.getWinnerId()).getScore(), YELLOW);
 
   display.setTextColor(BLUE, BLACK);
   display.setCursor(22, 11);
@@ -223,7 +182,7 @@ void loop()
     tilted();
   }
 
-  showScore(4, 2, currentPlayer.getScore(), YELLOW);
+  showScore(display, 2, 2, currentPlayer.getScore(), YELLOW);
   showPlayers(15, 20);
 
   // bille perdue
