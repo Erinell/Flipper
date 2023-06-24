@@ -3,6 +3,9 @@
 */
 #define HUB75
 
+// Position de l'affichage du score (LEFT, CENTER, RIGHT)
+#define RIGHT
+
 // Nombre de joueurs maximum dans la partie
 #define MAX_PLAYERS 4
 
