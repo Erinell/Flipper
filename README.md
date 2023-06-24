@@ -96,3 +96,4 @@ Fin de partie quand 3 balles ont été détéctées sur tout les joueurs.
 ## Todo
 - [ ] Ajouter de l'audio
 - [ ] Ajouter des chenillards (bonus et/ou score)
+- [ ] Fonctionnement bonus
