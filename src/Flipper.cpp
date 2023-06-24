@@ -285,6 +285,7 @@ int8_t Flipper::getWinnerId()
 
 void Flipper::ejectBall()
 {
+  delay(1000);
   digitalWrite(ballEjection, HIGH);
   delay(TIMER_SOLENOIDS);
   digitalWrite(ballEjection, LOW);
