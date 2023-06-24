@@ -1,3 +1,5 @@
+#define VERSION "1.3"
+
 #include <Arduino.h>
 #include <SPI.h>
 #include "Display.h"
