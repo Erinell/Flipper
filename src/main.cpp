@@ -35,11 +35,12 @@ void scrollString(String str)
 void initGame()
 {
   flipper.init();
-
+  flipper.resetTargets();
+  
   display.setTextColor(RED, BLACK);
   display.setFont();
   display.setTextSize(2);
-  // scrollString("Aucune balle");
+
   String txt = "Aucune bille";
   int x = 0;
   int pxwidth = (txt.length() * 12);
@@ -53,10 +54,6 @@ void initGame()
     {
       x = 0;
     }
-    // display.setCursor(2, 13);
-    // display.print("Aucune");
-    // display.setCursor(12, 29);
-    // display.print("Balle");
   }
 
   display.fillScreen(BLACK);
@@ -196,19 +193,17 @@ void loop()
     }
     flipper.resetBonus();
     flipper.nextPlayer();
-    // flipper.ejectBall();
-
     flipper.resetTargets();
     return;
-  }
-
-  if (flipper.isBallDetected())
-  {
-    flipper.ejectBall();
   }
 
   if (flipper.getPlayersOut() >= flipper.getMaxPlayer())
   {
     endgame();
+  }
+
+  if (flipper.isBallDetected())
+  {
+    flipper.ejectBall();
   }
 }
