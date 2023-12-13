@@ -14,4 +14,4 @@ constexpr uint16_t _trigger_solenoids_pin[] = TRIGGER_SOLENOID;
 static_assert(COUNT(_points_pin)<=COUNT(_points_value), "SCORE_VALUE doit être supérieur ou égal aux broches SCORE définies");
 static_assert(COUNT(_bonus_pin)<=COUNT(_bonus_value), "BONUS_VALUE doit être supérieur ou égal aux broches BONUS définies");
 static_assert(COUNT(_bonus_led)<=COUNT(_bonus_value), "BONUS_VALUE doit être supérieur ou égal aux broches LEDS_BONUS définies");
-static_assert(EQUAL(COUNT(_solenoids_pin),COUNT(_trigger_solenoids_pin)), "Les broches SOLENOIDS voient être égal aucx broches TRIGGER_SOLENOID");
+static_assert(EQUAL(COUNT(_solenoids_pin),COUNT(_trigger_solenoids_pin)), "Les broches SOLENOIDS doivent être égales aux broches TRIGGER_SOLENOID");
